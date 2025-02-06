@@ -9,3 +9,6 @@ django_venv/
 
 # PyCharm
 .idea
+
+# cache
+*.pyc
