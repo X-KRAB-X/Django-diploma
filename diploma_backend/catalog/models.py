@@ -1,5 +1,10 @@
 from django.db import models
-from django.db.models import ForeignKey
+
+
+def upload_image_to(instance: 'Image', filename: str):
+    return 'product_images/product_{pk}/{filename}'.format(
+        pk=instance.product.pk, filename=filename
+    )
 
 
 class Category(models.Model):
@@ -31,7 +36,7 @@ class Product(models.Model):
 
 class Image(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    src = models.CharField(max_length=100)
+    src = models.ImageField(null=True, blank=True, upload_to=upload_image_to)
     alt = models.CharField(max_length=100, default='Not Found.')
 
 
