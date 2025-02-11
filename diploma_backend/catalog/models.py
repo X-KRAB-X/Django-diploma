@@ -5,6 +5,11 @@ from django.db.models import ForeignKey
 class Category(models.Model):
     name = models.CharField(max_length=30, db_index=True)
 
+    # Отображение правильных имен в админ-панели
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=30, db_index=True)
