@@ -29,6 +29,24 @@ class CategoryImageSerializer(serializers.ModelSerializer):
         )
 
 
+class CategorySerializer(serializers.ModelSerializer):
+    image = CategoryImageSerializer()
+    subcategories = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = (
+            'id',
+            'title',
+            'image',
+            'subcategories'
+        )
+
+    # Пока что подкатегорий нет
+    def get_subcategories(self, obj):
+        return []
+
+
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
