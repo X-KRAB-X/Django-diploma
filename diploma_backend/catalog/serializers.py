@@ -66,14 +66,18 @@ class ProductShortSerializer(serializers.ModelSerializer):
         model = Product
         fields = (
             'id',
-            'title',
+            'category',
             'price',
             'count',
             'date',
+            'title',
             'description',
-            'rating',
             'freeDelivery',
-            'category',
             'images',
             'tags',
+            'reviews',
+            'rating',
         )
+
+    def get_reviews(self, obj):
+        return obj.reviews.count()
