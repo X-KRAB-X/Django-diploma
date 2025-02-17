@@ -1,11 +1,28 @@
 from rest_framework import serializers
-# TODO
-from .models import Product, Tag, Image, Reviews, Specifications
+
+from .models import (
+    Category,
+    Product,
+    Tag,
+    ProductImage,
+    CategoryImage,
+    Reviews,
+    Specifications,
+)
 
 
-class ImageSerializer(serializers.ModelSerializer):
+class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Image
+        model = ProductImage
+        fields = (
+            'src',
+            'alt'
+        )
+
+
+class CategoryImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CategoryImage
         fields = (
             'src',
             'alt'
@@ -24,7 +41,9 @@ class TagSerializer(serializers.ModelSerializer):
 # Возможно придется переименовать
 class ProductShortSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True)
-    images = ImageSerializer(many=True)
+    images = ProductImageSerializer(many=True)
+    reviews = serializers.SerializerMethodField()
+
     class Meta:
         model = Product
         fields = (
