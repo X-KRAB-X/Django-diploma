@@ -4,14 +4,24 @@ from .models import (
     Product,
     Category,
     Tag,
-    Image,
+    ProductImage,
+    CategoryImage,
     Reviews,
     Specifications
 )
 
 
 class ProductImages(admin.TabularInline):
-    model = Image
+    model = ProductImage
+
+
+class ProductReviews(admin.StackedInline):
+    model = Reviews
+
+
+class CategoryImages(admin.TabularInline):
+    model = CategoryImage
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -32,6 +42,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     inlines = [
         ProductImages,
+        ProductReviews
     ]
 
     def description_short(self, obj: Product):
@@ -43,14 +54,31 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-
     list_display = (
         'pk',
-        'name',
+        'title',
     )
     list_display_links = (
         'pk',
-        'name',
+        'title',
+    )
+
+    inlines = [
+        CategoryImages
+    ]
+
+
+@admin.register(CategoryImage)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'pk',
+        'category',
+        'src',
+        'alt'
+    )
+    list_display_links = (
+        'pk',
+        'category'
     )
 
 
@@ -66,7 +94,7 @@ class CategoryAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Image)
+@admin.register(ProductImage)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
@@ -76,6 +104,7 @@ class CategoryAdmin(admin.ModelAdmin):
     )
     list_display_links = (
         'pk',
+        'product'
     )
 
 
@@ -105,5 +134,5 @@ class CategoryAdmin(admin.ModelAdmin):
     )
     list_display_links = (
         'pk',
-        'name',
+        'product',
     )
