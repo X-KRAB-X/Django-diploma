@@ -16,6 +16,9 @@ class CatalogPagination(PageNumberPagination):
     Переопределяет метод `get_paginated_response`
     для получения валидного JSON
     """
+
+    page_size = 4
+    page_query_param = 'currentPage'
     def get_paginated_response(self, data):
         return Response({
             'currentPage': self.page.number,
