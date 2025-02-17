@@ -1,0 +1,347 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "title": "Sport"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "title": "Аудиотехника"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "title": "Бытовая техника"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "title": "Смартфоны"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "title": "Аксессуары"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "title": "Книги"
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 1,
+    "fields": {
+      "category": 4,
+      "src": "category_images/category_4/896656c5501144f190c80561fc1029f9.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "src": "category_images/category_1/a249123e86fc30b348ef69a6c4a3d960.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 3,
+    "fields": {
+      "category": 2,
+      "src": "category_images/category_2/e5c34ef85d47dbdc60c2215ca516e5af.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 4,
+    "fields": {
+      "category": 3,
+      "src": "category_images/category_3/83956303d11cc99c86c351b8e767b48d.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 5,
+    "fields": {
+      "category": 5,
+      "src": "category_images/category_5/d4d2cea48642ee202311f2122c617ad6.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 6,
+    "fields": {
+      "category": 6,
+      "src": "category_images/category_6/cfdce800efc595f261c1b57aedcf6d37.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Kids"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Наушники"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Музыка"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 4,
+    "fields": {
+      "name": "Смартфон"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 5,
+    "fields": {
+      "name": "Телефон"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 6,
+    "fields": {
+      "name": "Рюкзак"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 7,
+    "fields": {
+      "name": "Аксессуар"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 8,
+    "fields": {
+      "name": "Литература"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 9,
+    "fields": {
+      "name": "Кофемашина"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "title": "Самокат",
+      "price": "1000.00",
+      "count": 15,
+      "date": "2025-02-07T12:47:21.561Z",
+      "description": "Самый лучший который можно только представить в своей тяжелой жизни.",
+      "fullDescription": "Самый лучший который можно только представить в своей тяжелой жизни.\r\nИ еще лучше!",
+      "rating": "4.0",
+      "freeDelivery": true,
+      "category": 1,
+      "tags": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "title": "Беспроводные наушники Sony WH-1000XM5",
+      "price": "349.99",
+      "count": 50,
+      "date": "2025-02-12T10:33:54.101Z",
+      "description": "Премиальные беспроводные наушники с лучшим в индустрии шумоподавлением.",
+      "fullDescription": "Sony WH-1000XM5 - это флагманские беспроводные наушники, предлагающие непревзойденное качество звука, исключительное шумоподавление и удобную посадку. Благодаря новым драйверам и улучшенному алгоритму шумоподавления, они обеспечивают кристально чистое звучание и блокируют окружающий шум, позволяя полностью погрузиться в музыку. Поддерживают Bluetooth 5.2, Multipoint Connection, и кодеки LDAC, AAC и SBC. Время автономной работы до 30 часов.",
+      "rating": "4.8",
+      "freeDelivery": true,
+      "category": 2,
+      "tags": [
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "title": "Кофемашина Philips Series 5400 LatteGo",
+      "price": "799.00",
+      "count": 25,
+      "date": "2025-02-12T10:50:30.069Z",
+      "description": "Автоматическая кофемашина для приготовления напитков одним нажатием кнопки.",
+      "fullDescription": "Philips Series 5400 LatteGo - это автоматическая кофемашина, которая позволяет легко приготовить широкий спектр кофейных напитков, включая эспрессо, капучино, латте макиато и другие. Благодаря запатентованной системе LatteGo, молочная пена получается плотной и нежной, а очистка системы занимает всего несколько секунд. Кофемашина оснащена керамическими жерновами, которые обеспечивают равномерный помол и сохраняют аромат кофейных зерен.",
+      "rating": "4.5",
+      "freeDelivery": true,
+      "category": 3,
+      "tags": [
+        9
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "title": "Смартфон Samsung Galaxy S23 Ultra 256GB",
+      "price": "1199.00",
+      "count": 15,
+      "date": "2025-02-12T11:04:08.442Z",
+      "description": "Флагманский смартфон с невероятной камерой и мощным процессором.",
+      "fullDescription": "Samsung Galaxy S23 Ultra - это вершина мобильных технологий, предлагающая потрясающую камеру с разрешением 200 Мп, мощный процессор Snapdragon 8 Gen 2 для Galaxy и яркий Dynamic AMOLED 2X дисплей с частотой обновления 120 Гц. Встроенный стилус S Pen расширяет возможности использования смартфона. 256GB встроенной памяти достаточно для хранения большого количества фотографий, видео и приложений.",
+      "rating": "4.9",
+      "freeDelivery": true,
+      "category": 4,
+      "tags": [
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "title": "Рюкзак городской Xiaomi Mi City Backpack 2",
+      "price": "39.99",
+      "count": 100,
+      "date": "2025-02-12T11:05:37.392Z",
+      "description": ": Стильный и функциональный городской рюкзак для повседневного использования.",
+      "fullDescription": "Xiaomi Mi City Backpack 2 - это легкий и прочный городской рюкзак, изготовленный из водоотталкивающей ткани. Он имеет несколько отделений для удобной организации вещей, включая отделение для ноутбука до 15.6 дюймов. Эргономичная спинка и регулируемые лямки обеспечивают комфорт при ношении. Минималистичный дизайн подходит для любого стиля.",
+      "rating": "4.6",
+      "freeDelivery": false,
+      "category": 5,
+      "tags": [
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "title": "Книга “Мастер и Маргарита” Михаил Булгаков",
+      "price": "12.50",
+      "count": 200,
+      "date": "2025-02-12T11:06:15.790Z",
+      "description": "Культовый роман Михаила Булгакова о любви, добре и зле.",
+      "fullDescription": "“Мастер и Маргарита” - это один из самых известных и любимых романов Михаила Булгакова, сочетающий в себе элементы сатиры, фантастики, мистики и любовной истории. Действие романа разворачивается в Москве 1930-х годов и повествует о визите Воланда и его свиты, а также о трагической судьбе Мастера и его возлюбленной Маргариты.",
+      "rating": "4.9",
+      "freeDelivery": false,
+      "category": 6,
+      "tags": [
+        8
+      ]
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "src": "product_images/product_1/patinete-adultos-micro-micro-black-foto-375661.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "src": "product_images/product_2/6bab16f440159bf83998dfca9c8d.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 4,
+    "fields": {
+      "product": 3,
+      "src": "product_images/product_3/espressor-philips-hd865259-espressokapsuly15001506dadaplastikce_Pt7VLNM.png",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 5,
+    "fields": {
+      "product": 4,
+      "src": "product_images/product_4/9_630076.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 6,
+    "fields": {
+      "product": 5,
+      "src": "product_images/product_5/472141_2246_draft.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 7,
+    "fields": {
+      "product": 6,
+      "src": "product_images/product_6/scale_1200.png",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 1,
+    "fields": {
+      "product": 2,
+      "author": "Андрей",
+      "email": "123@gmail.com",
+      "text": "Потрясающий звук",
+      "rate": 5,
+      "date": "2025-02-13"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 1,
+    "fields": {
+      "product": 5,
+      "name": "Размер",
+      "value": "XL"
+    }
+  }
+]
