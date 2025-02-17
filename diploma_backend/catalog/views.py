@@ -49,3 +49,11 @@ class TagListView(APIView):
 
         serialized = TagSerializer(tags, many=True)
         return Response(serialized.data)
+
+
+class CategoriesListView(APIView):
+    def get(self, request: Request) -> Response:
+        categories = Category.objects.select_related('image')
+        serialized = CategorySerializer(categories, many=True)
+
+        return Response(serialized.data)
