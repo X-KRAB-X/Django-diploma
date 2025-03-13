@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'catalog.apps.CatalogConfig',
+    'basket.apps.BasketConfig',
 
     'frontend',
     'rest_framework',
@@ -138,3 +139,6 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend'
     ]
 }
+
+# Session
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
