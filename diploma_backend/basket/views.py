@@ -1,4 +1,4 @@
-from itertools import product
+import uuid
 
 from django.db import IntegrityError
 
@@ -10,54 +10,87 @@ from .models import Basket
 from .serializers import BasketProductSerializer
 
 
-def get_basket(request) -> Basket:
+def _get_basket(request: Request) -> tuple[Basket, bool]:
     """
     Функция для получения корзины.
 
     Получает на вход объект Request
-    Возвращает объект Basket привязанный к сессии или к объекту User.
+    Возвращает объект Basket привязанный к COOKIES или user,
+    а также is_created, сообщающее о создании новых куки.
 
     Создана во избежание дублирования кода.
     """
 
-    if request.session.session_key is None:
-        request.session.save()
+    # Если корзина и куки только создались, сообщаем об этом функции
+    is_created = False
 
-    # Корзина по сессии
-    if not request.user.is_authenticated:
-        # Используем в качестве ключа к корзине - ключ сессии, он создается автоматически, подробнее далее.
-        basket_key = request.session.get('basket_key')
+    # Используем в качестве ключа к корзине - uuid
+    basket_key = request.COOKIES.get('basket_key')
 
-        # Если ключ найден - получаем либо создаем корзину.
-        # Иначе - создаем корзину и сохраняем ключ.
-        if basket_key:
-            try:
-                basket = Basket.objects.get(basket_key=basket_key)
-            except Basket.DoesNotExist:
-
-                # Получаем ключ, создаем по нему запись в базе и сохраняем его внутри сессии
-                basket_key = request.session.session_key
-                basket = Basket.objects.create(basket_key=basket_key)
-                request.session['basket_key'] = basket_key
-
-        # Подразумевается, что это для случаев первого входа на сайт или же возникновения новой сессии.
-        else:
-            basket_key = request.session.session_key
-            basket = Basket.objects.create(basket_key=basket_key)
-            request.session['basket_key'] = basket_key
-
-    # Корзина пользователя
-    elif request.user.is_authenticated:
+    # Корзина пользователя User.
+    if request.user.is_authenticated:
         user = request.user
+
+        # Пробуем получить корзину пользователя
         try:
-            basket = Basket.objects.get(user=user)
+            basket = (
+                Basket.objects
+                .prefetch_related('basketitem_set')
+                .get(user=user)
+            )
         except Basket.DoesNotExist:
-            basket = Basket.objects.create(user=user)
+            # Подразумевается, что это для новых пользователей, прошедших регистрацию.
 
-    return basket
+            # Если есть ключ - привязываем пользователя к этой корзине.
+            if basket_key:
+
+                # Используем get_or_create на случай отсутствия корзины по ключу.
+                basket, created_or_not = (
+                    Basket.objects
+                    .prefetch_related('basketitem_set')
+                    .get_or_create(basket_key=basket_key)
+                )
+                basket.user = user
+                basket.save()
+
+            # Иначе - создаем новый ключ и корзину, уже с пользователем.
+            # P.S. Редкий случай, в основном для избежания ошибок.
+            else:
+                basket_key = uuid.uuid4()
+                basket = (
+                    Basket.objects
+                    .prefetch_related('basketitem_set')
+                    .create(basket_key=basket_key, user=user)
+                )
+                is_created = True
+
+    # Корзина только по ключу.
+    elif basket_key:
+
+        # Используем get_or_create на случай отсутствия корзины по ключу.
+        basket, created_or_not = (
+            Basket.objects
+            .prefetch_related('basketitem_set')
+            .get_or_create(basket_key=basket_key)
+        )
+
+    # Создание нового ключа и корзины
+    else:
+
+        # Подразумевается, что это для случаев первого входа на сайт
+        # или сгоревших куки у не вошедших пользователей.
+        basket_key = uuid.uuid4()
+        basket = basket = (
+            Basket.objects
+            .prefetch_related('basketitem_set')
+            .create(basket_key=basket_key)
+        )
+        is_created = True
+
+    return basket, is_created
 
 
-def basket_serialize(basket) -> list:
+def _basket_serialize(basket) -> list:
     """
     Функция для сериализации продуктов в корзине.
 
@@ -82,24 +115,32 @@ def basket_serialize(basket) -> list:
     return basket_data
 
 
-# TODO Перенос данных делать в API логина
-
 # TODO Возможно, при создании заказа придется проверять еще раз сколько товаров указано
 # TODO ибо пользователь может написать это вручную, но запросов на это не приходит
 
 
 class BasketView(APIView):
+    """
+    Класс с необходимыми endpoint's корзины
+    Реализует методы GET, POST, DELETE
+    """
+
     def get(self, request: Request) -> Response:
-        basket = get_basket(request)
+        basket, is_created = _get_basket(request)
 
-        basket_data = basket_serialize(basket)
+        basket_data = _basket_serialize(basket)
 
-        return Response(basket_data)
+        response = Response(basket_data)
+
+        # Если корзина была создана и ключа не было - устанавливаем новые куки с ключом сроком в неделю.
+        if is_created:
+            response.set_cookie(key='basket_key', value=basket.basket_key, max_age=60 * 60 * 24 * 7)
+
+        return response
 
     def post(self, request: Request) -> Response:
-        print(request.data)
 
-        basket = get_basket(request)
+        basket, is_created = _get_basket(request)
         try:
             # Получаем QuerySet с одним товаром в корзине, а также его кол-во
             basket_item_queryset = basket.basketitem_set.filter(product_id=request.data['id'])
@@ -130,14 +171,19 @@ class BasketView(APIView):
             if 'FOREIGN KEY' in e.args[0]:
                 return Response({'message': f'No product with id {request.data["id"]}'}, status=400)
 
-        basket_data = basket_serialize(basket)
+        basket_data = _basket_serialize(basket)
 
-        return Response(basket_data)
+        response = Response(basket_data)
+
+        # Если корзина была создана и ключа не было - устанавливаем новые куки с ключом сроком в неделю.
+        if is_created:
+            response.set_cookie(key='basket_key', value=basket.basket_key)
+
+        return response
 
     def delete(self, request: Request) -> Response:
-        print(request.data)
 
-        basket = get_basket(request)
+        basket, is_created = _get_basket(request)
         try:
             # Получаем QuerySet с одним товаром в корзине, а также его кол-во
             basket_item_queryset = basket.basketitem_set.filter(product_id=request.data['id'])
@@ -160,6 +206,12 @@ class BasketView(APIView):
         except (IntegrityError, AttributeError) as e:
             return Response({'message': 'Product not in basket'}, status=400)
 
-        basket_data = basket_serialize(basket)
+        basket_data = _basket_serialize(basket)
 
-        return Response(basket_data)
+        response = Response(basket_data)
+
+        # Если корзина была создана и ключа не было - устанавливаем новые куки с ключом сроком в неделю.
+        if is_created:
+            response.set_cookie(key='basket_key', value=basket.basket_key)
+
+        return response
