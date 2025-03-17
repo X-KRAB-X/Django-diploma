@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalog.apps.CatalogConfig',
     'basket.apps.BasketConfig',
+    'auth_shop.apps.AuthShopConfig',
 
     'frontend',
     'rest_framework',
