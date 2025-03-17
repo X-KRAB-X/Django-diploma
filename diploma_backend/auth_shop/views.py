@@ -68,4 +68,9 @@ class AuthSignOutView(APIView):
 
         # Выход
         logout(request)
-        return Response({}, status=200)
+
+        # Удаляем из cookie ключ корзины во избежание присваивания ее другому пользователю.
+        response = Response({}, status=200)
+        response.delete_cookie('basket_key')
+
+        return response
