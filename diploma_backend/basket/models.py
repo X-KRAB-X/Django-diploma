@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -22,7 +24,7 @@ class Basket(models.Model):
         ordering = ['pk']
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
-    basket_key = models.CharField(max_length=40, null=True, blank=True)
+    basket_key = models.UUIDField(editable=False, unique=True, blank=True, null=True)
     product = models.ManyToManyField(Product, related_name='basket', through=BasketItem)
 
     def __str__(self):
