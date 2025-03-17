@@ -27,23 +27,6 @@ class AuthSignInView(APIView):
         # Вход
         user: User = authenticate(request, username=data['username'], password=data['password'])
         if user is not None:
-
-            # Используем функцию из модуля корзины
-            current_basket = get_basket(request)
-
-            # Логика переноса корзины анонимного пользователя - авторизованному.
-            # Если у авторизованного корзина была изначально пуста - товары передаются ему,
-            # иначе - данные пропадают.
-            if not user.basket.basketitem_set.values():
-
-                # Проверяем, что корзина сессии также не пуста
-                if current_basket.basketitem_set.values():
-                    user.basket.basketitem_set.set(current_basket.basketitem_set.all())
-                    user.basket.save()
-
-            # Удаляем анонимную корзину
-            current_basket.delete()
-
             login(request, user)
         else:
             return Response({'message': 'invalid credentials'}, status=500)
