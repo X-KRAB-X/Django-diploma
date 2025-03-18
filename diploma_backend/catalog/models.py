@@ -81,6 +81,12 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, related_name='tags')
 
+    sortIndex = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
+
+    limited = models.BooleanField(default=False)
+
+    sold = models.PositiveIntegerField(default=0)
+
     def __str__(self):
         return f'{self.pk}. {self.title}: ${self.price}'
 
@@ -129,3 +135,18 @@ class Specifications(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='specifications', db_index=True)
     name = models.CharField(max_length=30, db_index=True)
     value = models.TextField(blank=True, null=False)
+
+
+class SaleProducts(models.Model):
+    """
+    Скидки на товары
+    """
+    class Meta:
+        verbose_name = 'Sale Product'
+        verbose_name_plural = 'Sale Products'
+        ordering = ['pk', 'product']
+
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='sales', db_index=True)
+    salePrice = models.DecimalField(default=0, max_digits=8, decimal_places=2)
+    dateFrom = models.DateField(auto_now_add=True)
+    dateTo = models.DateField(blank=False, null=False)
