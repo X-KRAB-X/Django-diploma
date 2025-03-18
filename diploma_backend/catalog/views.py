@@ -54,7 +54,7 @@ class CatalogListView(APIView):
                     # Проверка направления сортировки
                     params.get('sort') if params.get('sortType') == 'inc' else '-' + params.get('sort')
                 )
-                .defer('fullDescription')
+                .defer('fullDescription', 'sortIndex', 'limited')
             )
             # Отдельная проверка на наличие
             if params.get('filter[available]') == 'true':
