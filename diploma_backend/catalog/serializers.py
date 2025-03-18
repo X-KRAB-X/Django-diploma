@@ -81,3 +81,16 @@ class ProductShortSerializer(serializers.ModelSerializer):
 
     def get_reviews(self, obj):
         return obj.reviews.count()
+
+
+class SaleProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True)
+
+    class Meta:
+        model = Product
+        fields = (
+            'id',
+            'price',
+            'title',
+            'images'
+        )
