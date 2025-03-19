@@ -7,9 +7,11 @@ from rest_framework.pagination import PageNumberPagination
 from .models import Product, Tag, Category, SaleProducts
 from .serializers import (
     ProductShortSerializer,
+    ProductFullSerializer,
     TagSerializer,
     CategorySerializer,
-    SaleProductSerializer
+    SaleProductSerializer,
+    ReviewsSerializer
 )
 
 
@@ -175,3 +177,34 @@ class SaleProductsListView(APIView):
             data.append(current_discount)
 
         return paginator.get_paginated_response(data)
+
+
+class ProductDetailView(APIView):
+    def get(self, request: Request, pk: int) -> Response:
+        try:
+            product = Product.objects.get(pk=pk)
+        except Product.DoesNotExist as e:
+            return Response({'message': f'Product with id: {pk} - not exists.'})
+
+        serialized = ProductFullSerializer(product)
+
+        return Response(serialized.data)
+
+
+class ProductDetailReviewView(APIView):
+    def post(self, request: Request, pk: int) -> Response:
+        try:
+            product = Product.objects.get(pk=pk)
+        except Product.DoesNotExist as e:
+            return Response({'message': f'Product with id: {pk} - not exists.'})
+
+        product.reviews.create(
+            author=request.data['author'],
+            email=request.data['email'],
+            text=request.data['text'],
+            rate=request.data['rate']
+        )
+
+        serialized = ReviewsSerializer(product.reviews, many=True)
+
+        return Response(serialized.data)
