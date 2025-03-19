@@ -7,24 +7,31 @@ from .models import (
     ProductImage,
     CategoryImage,
     Reviews,
-    Specifications
+    Specifications,
+    SaleProducts
 )
 
 
-class ProductImages(admin.TabularInline):
+class ProductImagesInline(admin.TabularInline):
     model = ProductImage
 
 
-class ProductReviews(admin.StackedInline):
+class ProductReviewsInline(admin.StackedInline):
     model = Reviews
 
 
-class CategoryImages(admin.TabularInline):
+class CategoryImagesInline(admin.TabularInline):
     model = CategoryImage
+
+
+class SaleProductInline(admin.StackedInline):
+    model = SaleProducts
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    ordering = ['pk']
+
     list_display = (
         'pk',
         'title',
@@ -34,16 +41,42 @@ class ProductAdmin(admin.ModelAdmin):
         'description_short',
         'rating',
         'freeDelivery',
+        'limited',
+        'sortIndex',
+        'sold',
     )
     list_display_links = (
         'pk',
         'title',
+        'description_short',
     )
 
     inlines = [
-        ProductImages,
-        ProductReviews
+        ProductImagesInline,
+        SaleProductInline,
+        ProductReviewsInline
     ]
+
+    readonly_fields = ('date', )
+
+    fieldsets = (
+        ('Общая информация', {
+            'fields': ('title', 'description', 'fullDescription', 'price', 'freeDelivery', 'date')
+        }),
+        ('Продажи и наличие', {
+            'fields': ('count', 'limited', 'sold', 'rating'),
+            'description': 'Информация о наличии товара, кол-ве продаж и рейтинге.'
+        }),
+        ('Категория и теги', {
+            'fields': ('category', 'tags'),
+            'classes': ('collapse',),
+            'description': 'Можно изменить принадлежность товара к категории и накинуть новые теги.'
+        }),
+        ('Extra', {
+            'fields': ('sortIndex',),
+            'classes': ('collapse',)
+        })
+    )
 
     def description_short(self, obj: Product):
         if len(obj.description) > 30:
@@ -64,12 +97,12 @@ class CategoryAdmin(admin.ModelAdmin):
     )
 
     inlines = [
-        CategoryImages
+        CategoryImagesInline
     ]
 
 
 @admin.register(CategoryImage)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryImageAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'category',
@@ -83,7 +116,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Tag)
-class CategoryAdmin(admin.ModelAdmin):
+class TagAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'name',
@@ -95,7 +128,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(ProductImage)
-class CategoryAdmin(admin.ModelAdmin):
+class ProductImageAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'product',
@@ -109,7 +142,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Reviews)
-class CategoryAdmin(admin.ModelAdmin):
+class ReviewsAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'product',
@@ -125,7 +158,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Specifications)
-class CategoryAdmin(admin.ModelAdmin):
+class SpecificationsAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'product',
@@ -135,4 +168,22 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display_links = (
         'pk',
         'product',
+        'name'
+    )
+
+
+@admin.register(SaleProducts)
+class SaleProductAdmin(admin.ModelAdmin):
+    ordering = ['pk']
+
+    list_display = (
+        'pk',
+        'product',
+        'salePrice',
+        'dateFrom',
+        'dateTo'
+    )
+    list_display_links = (
+        'pk',
+        'product'
     )

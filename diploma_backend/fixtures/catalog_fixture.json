@@ -171,6 +171,9 @@
       "rating": "4.0",
       "freeDelivery": true,
       "category": 1,
+      "sortIndex": 1,
+      "limited": true,
+      "sold": 6,
       "tags": [
         1
       ]
@@ -189,6 +192,9 @@
       "rating": "4.8",
       "freeDelivery": true,
       "category": 2,
+      "sortIndex": 1,
+      "limited": false,
+      "sold": 11,
       "tags": [
         2,
         3
@@ -208,6 +214,9 @@
       "rating": "4.5",
       "freeDelivery": true,
       "category": 3,
+      "sortIndex": 5,
+      "limited": false,
+      "sold": 1,
       "tags": [
         9
       ]
@@ -226,6 +235,9 @@
       "rating": "4.9",
       "freeDelivery": true,
       "category": 4,
+      "sortIndex": 1,
+      "limited": true,
+      "sold": 4,
       "tags": [
         4,
         5
@@ -240,11 +252,14 @@
       "price": "39.99",
       "count": 100,
       "date": "2025-02-12T11:05:37.392Z",
-      "description": ": Стильный и функциональный городской рюкзак для повседневного использования.",
+      "description": "Стильный и функциональный городской рюкзак для повседневного использования.",
       "fullDescription": "Xiaomi Mi City Backpack 2 - это легкий и прочный городской рюкзак, изготовленный из водоотталкивающей ткани. Он имеет несколько отделений для удобной организации вещей, включая отделение для ноутбука до 15.6 дюймов. Эргономичная спинка и регулируемые лямки обеспечивают комфорт при ношении. Минималистичный дизайн подходит для любого стиля.",
       "rating": "4.6",
       "freeDelivery": false,
       "category": 5,
+      "sortIndex": 4,
+      "limited": true,
+      "sold": 4,
       "tags": [
         6,
         7
@@ -264,6 +279,9 @@
       "rating": "4.9",
       "freeDelivery": false,
       "category": 6,
+      "sortIndex": 7,
+      "limited": true,
+      "sold": 15,
       "tags": [
         8
       ]
@@ -342,6 +360,26 @@
       "product": 5,
       "name": "Размер",
       "value": "XL"
+    }
+  },
+  {
+    "model": "catalog.saleproducts",
+    "pk": 1,
+    "fields": {
+      "product": 4,
+      "salePrice": "700.00",
+      "dateFrom": "2025-03-18",
+      "dateTo": "2025-03-24"
+    }
+  },
+  {
+    "model": "catalog.saleproducts",
+    "pk": 2,
+    "fields": {
+      "product": 3,
+      "salePrice": "599.99",
+      "dateFrom": "2025-03-18",
+      "dateTo": "2025-03-22"
     }
   }
 ]
