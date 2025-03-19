@@ -4,11 +4,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 
-from .models import Product, Tag, Category
+from .models import Product, Tag, Category, SaleProducts
 from .serializers import (
     ProductShortSerializer,
+    ProductFullSerializer,
     TagSerializer,
-    CategorySerializer
+    CategorySerializer,
+    SaleProductSerializer,
+    ReviewsSerializer
 )
 
 
@@ -54,7 +57,7 @@ class CatalogListView(APIView):
                     # Проверка направления сортировки
                     params.get('sort') if params.get('sortType') == 'inc' else '-' + params.get('sort')
                 )
-                .defer('fullDescription')
+                .defer('fullDescription', 'sortIndex', 'limited')
             )
             # Отдельная проверка на наличие
             if params.get('filter[available]') == 'true':
@@ -96,5 +99,112 @@ class CategoriesListView(APIView):
     def get(self, request: Request) -> Response:
         categories = Category.objects.select_related('image')
         serialized = CategorySerializer(categories, many=True)
+
+        return Response(serialized.data)
+
+
+class BannersListView(APIView):
+    def get(self, request: Request) -> Response:
+        data = []
+
+        # Берем по одному товару из первых трех категорий в базе.
+        for category in Category.objects.prefetch_related('product_set')[:3]:
+            serialized = ProductShortSerializer(category.product_set.first())
+            data.append(serialized.data)
+
+        return Response(data)
+
+
+class PopularListView(APIView):
+    def get(self, request: Request) -> Response:
+        products = (
+            Product.objects
+            .select_related('category')
+            .prefetch_related('tags')
+            .prefetch_related('images')
+            .prefetch_related('reviews')
+            .order_by('sortIndex', '-sold')
+            .defer('fullDescription', 'sortIndex')
+            [:8]
+        )
+
+        serialized = ProductShortSerializer(products, many=True)
+
+        return Response(serialized.data)
+
+
+class LimitedListView(APIView):
+    def get(self, request: Request) -> Response:
+
+        # Первые 16 товаров с параметром limited=True
+        products = (
+            Product.objects
+            .select_related('category')
+            .prefetch_related('tags')
+            .prefetch_related('images')
+            .prefetch_related('reviews')
+            .filter(limited=True)
+            .defer('fullDescription', 'sortIndex')
+            [:16]
+        )
+
+        serialized = ProductShortSerializer(products, many=True)
+
+        return Response(serialized.data)
+
+
+class SaleProductsListView(APIView):
+    def get(self, request: Request) -> Response:
+        paginator = CatalogPagination()
+        data = []
+
+        sales = SaleProducts.objects.select_related('product')
+        page = paginator.paginate_queryset(sales, request, view=self)
+
+        for discount in page:
+
+            # Сериализуем сам товар.
+            serialized = SaleProductSerializer(discount.product)
+            current_discount = serialized.data
+
+            # Дополняем получившийся словарь, указывая параметры скидки.
+            current_discount['salePrice'] = discount.salePrice
+
+            # Обрезаем часть даты для получения валидного значения.
+            current_discount['dateFrom'] = str(discount.dateFrom)[5:]
+            current_discount['dateTo'] = str(discount.dateTo)[5:]
+
+            data.append(current_discount)
+
+        return paginator.get_paginated_response(data)
+
+
+class ProductDetailView(APIView):
+    def get(self, request: Request, pk: int) -> Response:
+        try:
+            product = Product.objects.get(pk=pk)
+        except Product.DoesNotExist as e:
+            return Response({'message': f'Product with id: {pk} - not exists.'})
+
+        serialized = ProductFullSerializer(product)
+
+        return Response(serialized.data)
+
+
+class ProductDetailReviewView(APIView):
+    def post(self, request: Request, pk: int) -> Response:
+        try:
+            product = Product.objects.get(pk=pk)
+        except Product.DoesNotExist as e:
+            return Response({'message': f'Product with id: {pk} - not exists.'})
+
+        product.reviews.create(
+            author=request.data['author'],
+            email=request.data['email'],
+            text=request.data['text'],
+            rate=request.data['rate']
+        )
+
+        serialized = ReviewsSerializer(product.reviews, many=True)
 
         return Response(serialized.data)
