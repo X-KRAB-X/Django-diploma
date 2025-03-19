@@ -13,7 +13,7 @@ class ProfileAvatarSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    avatar = ProfileAvatarSerializer(many=True)
+    avatar = ProfileAvatarSerializer()
 
     class Meta:
         model = Profile
