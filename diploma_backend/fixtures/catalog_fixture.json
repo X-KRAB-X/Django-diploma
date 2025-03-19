@@ -354,12 +354,252 @@
     }
   },
   {
+    "model": "catalog.reviews",
+    "pk": 2,
+    "fields": {
+      "product": 5,
+      "author": "Евгений",
+      "email": "123mmm@gmail.com",
+      "text": "Крайне удобен!",
+      "rate": 4,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 3,
+    "fields": {
+      "product": 5,
+      "author": "Елена",
+      "email": "joker25@mail.ru",
+      "text": "Лямки жмут!",
+      "rate": 2,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 4,
+    "fields": {
+      "product": 1,
+      "author": "Иван Петров",
+      "email": "ivan.petrov@example.com",
+      "text": "Отличный самокат, ребенок в восторге! Крепкий и удобный.",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 5,
+    "fields": {
+      "product": 1,
+      "author": "Анна Смирнова",
+      "email": "anna.smirnova@test.net",
+      "text": "Хороший самокат, но немного тяжеловат для ребенка 6 лет.",
+      "rate": 4,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 6,
+    "fields": {
+      "product": 2,
+      "author": "Дмитрий Иванов",
+      "email": "dmitry.ivanov@mail.org",
+      "text": "Просто невероятное шумоподавление! Звук отличный, удобно сидят.",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 7,
+    "fields": {
+      "product": 3,
+      "author": "Сергей Николаев",
+      "email": "sergey.nikolaev@yahoo.com",
+      "text": "Кофе просто супер! Легко чистить, много разных напитков.",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 8,
+    "fields": {
+      "product": 3,
+      "author": "Ольга Кузнецова",
+      "email": "olga.kuznetsova@outlook.fr",
+      "text": "Хорошая кофемашина, но иногда протекает вода.",
+      "rate": 4,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 9,
+    "fields": {
+      "product": 4,
+      "author": "Алексей Морозов",
+      "email": "alexey.morozov@hotmail.de",
+      "text": "Лучший телефон, который у меня был!",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 10,
+    "fields": {
+      "product": 4,
+      "author": "Светлана Петрова",
+      "email": "svetlana.petrova@inbox.com",
+      "text": "Камера просто бомба! Производительность на высоте.",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 11,
+    "fields": {
+      "product": 6,
+      "author": "Марина Зайцева",
+      "email": "marina.zaytseva@anotheremail.net",
+      "text": "Классика, которую стоит прочитать каждому!",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 12,
+    "fields": {
+      "product": 6,
+      "author": "Андрей Павлов",
+      "email": "andrey.pavlov@testdomain.info",
+      "text": "Интересная книга, но немного затянутое начало.",
+      "rate": 4,
+      "date": "2025-03-19"
+    }
+  },
+  {
     "model": "catalog.specifications",
     "pk": 1,
     "fields": {
       "product": 5,
       "name": "Размер",
       "value": "XL"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "name": "Материал рамы",
+      "value": "Алюминий"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "name": "Максимальная нагрузка",
+      "value": "100 кг"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "name": "Время работы",
+      "value": "30 часов"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 5,
+    "fields": {
+      "product": 2,
+      "name": "Тип подключения",
+      "value": "Bluetooth 5.2"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 6,
+    "fields": {
+      "product": 3,
+      "name": "Объем резервуара для воды",
+      "value": "1.8 литра"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 7,
+    "fields": {
+      "product": 3,
+      "name": "Мощность",
+      "value": "1500 Вт"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 8,
+    "fields": {
+      "product": 4,
+      "name": "Объем памяти",
+      "value": "256 GB"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 9,
+    "fields": {
+      "product": 4,
+      "name": "Диагональ экрана",
+      "value": "6.8 дюймов"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 10,
+    "fields": {
+      "product": 5,
+      "name": "Материал",
+      "value": "Полиэстер"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 11,
+    "fields": {
+      "product": 5,
+      "name": "Объем",
+      "value": "17 литров"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 12,
+    "fields": {
+      "product": 6,
+      "name": "Количество страниц",
+      "value": "384"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 13,
+    "fields": {
+      "product": 6,
+      "name": "Переплет",
+      "value": "Твердый"
     }
   },
   {
