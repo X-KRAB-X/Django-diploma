@@ -28,6 +28,10 @@ class SaleProductInline(admin.StackedInline):
     model = SaleProducts
 
 
+class SpecificationsInline(admin.StackedInline):
+    model = Specifications
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     ordering = ['pk']
@@ -52,6 +56,7 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
     inlines = [
+        SpecificationsInline,
         ProductImagesInline,
         SaleProductInline,
         ProductReviewsInline
