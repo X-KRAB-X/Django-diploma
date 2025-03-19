@@ -16,7 +16,8 @@ class ProfileView(APIView):
     def get(self, request: Request) -> Response:
 
         # Ловим ошибку отсутствующего профиля и создаем его.
-        # Возможно если User был создан за пределами сайта, например в админке
+        # Расчитано на первый заход в профиль после регистрации.
+        # Создаю его здесь, чтобы лишний раз не переплетать приложения между собой
         try:
             profile = request.user.profile
         except Profile.DoesNotExist:
@@ -29,7 +30,8 @@ class ProfileView(APIView):
     def post(self, request: Request) -> Response:
 
         # Ловим ошибку отсутствующего профиля и создаем его.
-        # Возможно если User был создан за пределами сайта, например в админке
+        # Расчитано на первый заход в профиль после регистрации.
+        # Создаю его здесь, чтобы лишний раз не переплетать приложения между собой
         try:
             profile = request.user.profile
         except Profile.DoesNotExist:
@@ -72,7 +74,8 @@ class ProfileAvatarView(APIView):
     def post(self, request: Request) -> Response:
 
         # Ловим ошибку отсутствующего профиля и создаем его.
-        # Возможно если User был создан за пределами сайта, например в админке
+        # Расчитано на первый заход в профиль после регистрации.
+        # Создаю его здесь, чтобы лишний раз не переплетать приложения между собой
         try:
             profile = request.user.profile
         except Profile.DoesNotExist:
