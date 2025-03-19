@@ -142,26 +142,28 @@ class BasketView(APIView):
 
         basket, is_created = _get_basket(request)
         try:
+            # Базовая валидация
+            # Если передано отрицательное либо дробное число - вызываем ошибку
+            if request.data['count'] < 0 or not isinstance(request.data['count'], int):
+                raise ValueError
+
             # Получаем QuerySet с одним товаром в корзине, а также его кол-во
             basket_item_queryset = basket.basketitem_set.filter(product_id=request.data['id'])
 
             # Проверяем что товар есть в корзине, иначе добавляем
-            if basket_item_queryset.exists():
-                count = basket_item_queryset.first().count
+            if not basket_item_queryset.exists():
+                basket.basketitem_set.create(product_id=request.data['id'], count=0)
 
-                # Если передано отрицательное либо дробное число - вызываем ошибку
-                if request.data['count'] < 0 or not isinstance(request.data['count'], int):
-                    raise ValueError
+            count = basket_item_queryset.first().count
 
-                # Обновляем QuerySet путем увеличения кол-ва товара
-                # Проверяем, что товара в корзине не больше, чем на складе, т.е. Product.count
-                elif count + request.data['count'] >= basket_item_queryset.first().product.count:
-                    product_count = basket_item_queryset.first().product.count
-                    basket_item_queryset.update(count=product_count)
-                else:
-                    basket_item_queryset.update(count=(count + request.data['count']))
+            # Обновляем QuerySet путем увеличения кол-ва товара
+            # Проверяем, что товара в корзине не больше, чем на складе, т.е. Product.count
+            # Если это так - указываем максимально допустимое кол-во
+            if count + request.data['count'] >= basket_item_queryset.first().product.count:
+                product_count = basket_item_queryset.first().product.count
+                basket_item_queryset.update(count=product_count)
             else:
-                basket.basketitem_set.create(product_id=request.data['id'])
+                basket_item_queryset.update(count=(count + request.data['count']))
 
         except ValueError as e:
             return Response({'message': 'count must be an integer and a positive'}, status=400)
@@ -185,16 +187,17 @@ class BasketView(APIView):
 
         basket, is_created = _get_basket(request)
         try:
-            # Получаем QuerySet с одним товаром в корзине, а также его кол-во
-            basket_item_queryset = basket.basketitem_set.filter(product_id=request.data['id'])
-            count = basket_item_queryset.first().count
-
+            # Базовая валидация
             # Если передано отрицательное либо дробное число - вызываем ошибку
             if request.data['count'] < 0 or not isinstance(request.data['count'], int):
                 raise ValueError
 
+            # Получаем QuerySet с одним товаром в корзине, а также его кол-во
+            basket_item_queryset = basket.basketitem_set.filter(product_id=request.data['id'])
+            count = basket_item_queryset.first().count
+
             # Если приходит запрос с кол-вом равным текущему или более - товар удаляется из корзины
-            elif count <= request.data['count']:
+            if count <= request.data['count']:
                 basket_item_queryset.delete()
             else:
                 basket_item_queryset.update(count=(count - request.data['count']))
