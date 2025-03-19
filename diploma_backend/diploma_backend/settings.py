@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'basket.apps.BasketConfig',
     'auth_shop.apps.AuthShopConfig',
+    'profile_shop.apps.ProfileShopConfig',
 
     'frontend',
     'rest_framework',
