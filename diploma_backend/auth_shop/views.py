@@ -7,6 +7,8 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from profile_shop.models import Profile
+
 
 # Должен проверять только наличие пользователя в системе
 class AuthSignInView(APIView):
@@ -58,6 +60,10 @@ class AuthSignUpView(APIView):
 
         user = authenticate(request, username=data['username'], password=data['password'])
         if user is not None:
+
+            # Создаем профиль
+            Profile.objects.create(user=user)
+
             login(request, user)
 
         return Response({}, status=200)
