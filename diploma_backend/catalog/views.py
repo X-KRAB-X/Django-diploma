@@ -53,7 +53,6 @@ class CatalogListView(APIView):
                 .filter(
                     title__icontains=params.get('filter[name]'),
                     price__range=(params.get('filter[minPrice]'), params.get('filter[maxPrice]')),
-                    freeDelivery=True if params.get('filter[freeDelivery]') == 'true' else False
                 )
                 .order_by(
                     # Проверка направления сортировки
@@ -61,6 +60,11 @@ class CatalogListView(APIView):
                 )
                 .defer('fullDescription', 'sortIndex', 'limited')
             )
+            # Отдельная проверка бесплатной доставки
+            # Если передано false - будут выведены товары с бесплатной и платной.
+            if params.get('filter[freeDelivery]') == 'true':
+                products = products.filter(freeDelivery=True)
+
             # Отдельная проверка на наличие
             if params.get('filter[available]') == 'true':
                 products = products.filter(count__gt=0)
