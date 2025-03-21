@@ -1,3 +1,5 @@
+from django.db.models import Sum
+
 from rest_framework.request import Request
 from rest_framework.response import Response
 
@@ -204,6 +206,15 @@ class ProductDetailReviewView(APIView):
             text=request.data['text'],
             rate=request.data['rate']
         )
+
+        # Изменение рейтинга товара.
+        # Получаем кол-во оценок и их сумму.
+        rate_count = product.reviews.count()
+        rate_summ = product.reviews.aggregate(rate_summ=Sum('rate'))['rate_summ']
+
+        # Присваиваем товару среднее арифметическое, что и является оценкой.
+        product.rating = round(rate_summ / rate_count, 1)
+        product.save()
 
         serialized = ReviewsSerializer(product.reviews, many=True)
 
