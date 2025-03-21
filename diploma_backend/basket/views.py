@@ -38,31 +38,39 @@ def _get_basket(request: Request) -> tuple[Basket, bool]:
                 .prefetch_related('basketitem_set')
                 .get(user=user)
             )
+
+            # Здесь логика проверки того, что в анонимной корзине были товары, а пользовательская была пустой.
+            # Если же пользовательская чем-то заполнена - простая очистка анонимной.
+
+            # P.S. Если товары не передать пользователю - при выходе они вновь отобразятся, что не совсем корректно.
+
+            # Если есть ключ и корзина пользователя пуста - пытаемся получить анонимную корзину.
+            if basket_key and not basket.basketitem_set.exists():
+                cookie_basket = Basket.objects.prefetch_related('basketitem_set').filter(basket_key=basket_key)
+
+                # Если корзина существует - проверяем что она не пуста.
+                if cookie_basket.exists():
+                    if cookie_basket.first().basketitem_set.exists():
+                        # Передаем объекты пользователю
+                        basket.basketitem_set.set(cookie_basket.basketitem_set)
+
         except Basket.DoesNotExist:
             # Подразумевается, что это для новых пользователей, прошедших регистрацию.
 
-            # Если есть ключ - привязываем пользователя к этой корзине.
+            # Создаем для пользователя новую корзину.
+            basket = Basket.objects.create(user=user)
+
+            # Если есть ключ - идет процедура перебазирования товаров
             if basket_key:
 
-                # Используем get_or_create на случай отсутствия корзины по ключу.
-                basket, created_or_not = (
-                    Basket.objects
-                    .prefetch_related('basketitem_set')
-                    .get_or_create(basket_key=basket_key)
-                )
-                basket.user = user
-                basket.save()
+                # Пытаемся получить QuerySet с корзиной внутри.
+                cookie_basket = Basket.objects.prefetch_related('basketitem_set').filter(basket_key=basket_key)
 
-            # Иначе - создаем новый ключ и корзину, уже с пользователем.
-            # P.S. Редкий случай, в основном для избежания ошибок.
-            else:
-                basket_key = uuid.uuid4()
-                basket = (
-                    Basket.objects
-                    .prefetch_related('basketitem_set')
-                    .create(basket_key=basket_key, user=user)
-                )
-                is_created = True
+                # Если корзина существует - проверяем что она не пуста.
+                if cookie_basket.exists():
+                    if cookie_basket.first().basketitem_set.exists():
+                        # Передаем объекты пользователю
+                        basket.basketitem_set.set(cookie_basket.first().basketitem_set.all())
 
     # Корзина только по ключу.
     elif basket_key:
