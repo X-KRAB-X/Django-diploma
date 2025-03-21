@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'catalog.apps.CatalogConfig',
     'basket.apps.BasketConfig',
     'auth_shop.apps.AuthShopConfig',
     'profile_shop.apps.ProfileShopConfig',
+    'order.apps.OrderConfig',
 
     'frontend',
     'rest_framework',
