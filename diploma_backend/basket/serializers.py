@@ -1,32 +1,14 @@
 from rest_framework import serializers
 
 from .models import Basket
-from catalog.models import Product, ProductImage, Tag
+from catalog.models import Product
+
+# Берем готовый сериализатор
+from catalog.serializers import ProductShortSerializer
 
 
-class ProductImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductImage
-        fields = (
-            'src',
-            'alt'
-        )
-
-
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
-        fields = (
-            'id',
-            'name',
-        )
-
-
-class BasketProductSerializer(serializers.ModelSerializer):
-    tags = TagSerializer(many=True)
-    images = ProductImageSerializer(many=True)
-    reviews = serializers.SerializerMethodField()
-
+# Наследуемся от сериализатора товаров и редактируем поля
+class BasketProductSerializer(ProductShortSerializer):
     class Meta:
         model = Product
         fields = (
@@ -42,6 +24,3 @@ class BasketProductSerializer(serializers.ModelSerializer):
             'reviews',
             'rating',
         )
-
-    def get_reviews(self, obj):
-        return obj.reviews.count()
