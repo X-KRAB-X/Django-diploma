@@ -116,7 +116,7 @@ class Reviews(models.Model):
     author = models.CharField(max_length=40, db_index=True)
     email = models.EmailField(max_length=254)
     text = models.TextField(blank=True, null=False)
-    rate = models.IntegerField(blank=False, null=False, validators=[MaxValueValidator(5), MinValueValidator(1)])
+    rate = models.IntegerField(choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)], blank=False, null=False, validators=[MaxValueValidator(5), MinValueValidator(1)])
     date = models.DateField(auto_now_add=True)
 
 
