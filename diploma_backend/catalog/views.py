@@ -170,9 +170,9 @@ class SaleProductsListView(APIView):
             # Дополняем получившийся словарь, указывая параметры скидки.
             current_discount['salePrice'] = discount.salePrice
 
-            # Обрезаем часть даты для получения валидного значения.
-            current_discount['dateFrom'] = str(discount.dateFrom)[5:]
-            current_discount['dateTo'] = str(discount.dateTo)[5:]
+            # Форматируем дату для получения валидного значения
+            current_discount['dateFrom'] = discount.dateFrom.strftime('%m-%d')
+            current_discount['dateTo'] = discount.dateTo.strftime('%m-%d')
 
             data.append(current_discount)
 

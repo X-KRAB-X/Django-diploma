@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.http import QueryDict
 
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -13,10 +14,15 @@ from profile_shop.models import Profile
 # Должен проверять только наличие пользователя в системе
 class AuthSignInView(APIView):
     def post(self, request: Request) -> Response:
+
         # Десериализуем тело запроса
-        data = json.loads(
-            list(request.data.keys())[0]
-        )
+        if not isinstance(request.data, QueryDict):
+            data = request.data
+            print(data)
+        else:
+            data = json.loads(
+                list(request.data.keys())[0]
+            )
 
         # Базовая валидация
         if not data['username'] or not data['password']:
