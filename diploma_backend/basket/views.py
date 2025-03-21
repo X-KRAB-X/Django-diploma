@@ -54,6 +54,13 @@ def _get_basket(request: Request) -> tuple[Basket, bool]:
                         # Передаем объекты пользователю
                         basket.basketitem_set.set(cookie_basket.basketitem_set)
 
+            # Очистка анонимной корзины
+            elif basket_key:
+                cookie_basket = Basket.objects.prefetch_related('basketitem_set').filter(basket_key=basket_key)
+
+                if cookie_basket.exists():
+                    cookie_basket.first().basketitem_set.all().delete()
+
         except Basket.DoesNotExist:
             # Подразумевается, что это для новых пользователей, прошедших регистрацию.
 
