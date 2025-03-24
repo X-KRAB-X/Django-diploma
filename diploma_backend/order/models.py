@@ -37,3 +37,4 @@ class Order(models.Model):
     # Вспомогательное поле, служит для проверки того, что заказ на стадии формирования.
     isCreated = models.BooleanField(default=False)
 
+    isDeleted = models.BooleanField(default=False)

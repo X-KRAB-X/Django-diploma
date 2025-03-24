@@ -17,6 +17,7 @@ class Profile(models.Model):
         null=True, blank=True,
         validators=[MinValueValidator(10_000_000_000), MaxValueValidator(99_999_999_999)] # Формат РФ +7...
     )
+    isDeleted = models.BooleanField(default=False)
 
 
 class ProfileImage(models.Model):
