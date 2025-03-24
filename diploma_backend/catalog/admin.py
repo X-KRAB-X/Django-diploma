@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 
 from .models import (
     Product,
@@ -32,9 +32,10 @@ class SpecificationsInline(admin.StackedInline):
     model = Specifications
 
 
-@admin.action(description='Mark product deleted')
+@admin.action(description='Mark product undeleted')
 def mark_objects_deleted(modeladmin, request, queryset):
-    queryset.update(isDeleted=True)
+    queryset.update(isDeleted=False)
+    modeladmin.message_user(request, 'Товары успешно помечены как актуальные.', messages.SUCCESS)
 
 
 @admin.register(Product)

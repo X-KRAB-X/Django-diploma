@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 
 from .models import Profile, ProfileImage
 
@@ -7,9 +7,10 @@ class ProfileImageInline(admin.TabularInline):
     model = ProfileImage
 
 
-@admin.action(description='Mark profile deleted')
+@admin.action(description='Mark profile undeleted')
 def mark_objects_deleted(modeladmin, request, queryset):
-    queryset.update(isDeleted=True)
+    queryset.update(isDeleted=False)
+    modeladmin.message_user(request, 'Профили успешно помечены как актуальные.', messages.SUCCESS)
 
 
 @admin.register(Profile)

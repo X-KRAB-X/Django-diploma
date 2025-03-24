@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 
 from .models import Order, OrderItem
 
@@ -7,9 +7,11 @@ class OrderItemInline(admin.TabularInline):
     model = OrderItem
 
 
-@admin.action(description='Mark order deleted')
+@admin.action(description='Mark order undeleted')
 def mark_objects_deleted(modeladmin, request, queryset):
     queryset.update(isDeleted=True)
+    queryset.update(isDeleted=False)
+    modeladmin.message_user(request, 'Заказы успешно помечены как актуальные.', messages.SUCCESS)
 
 
 @admin.register(Order)
