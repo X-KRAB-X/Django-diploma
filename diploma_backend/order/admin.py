@@ -9,7 +9,6 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.action(description='Mark order undeleted')
 def mark_objects_deleted(modeladmin, request, queryset):
-    queryset.update(isDeleted=True)
     queryset.update(isDeleted=False)
     modeladmin.message_user(request, 'Заказы успешно помечены как актуальные.', messages.SUCCESS)
 
@@ -42,6 +41,28 @@ class OrderAdmin(admin.ModelAdmin):
     actions = [
         mark_objects_deleted
     ]
+
+    readonly_fields = ('createdAt',)
+
+    fieldsets = (
+        ('Информация о покупателе', {
+            'fields': ('user', 'fullName', 'phone', 'email')
+        }),
+        ('Оплата', {
+            'fields': ('totalCost', 'paymentType', 'isPayed')
+        }),
+        ('Информация о доставке', {
+            'fields': ('deliveryType', 'city', 'address')
+        }),
+        ('Информация о заказе', {
+            'fields': ('createdAt', 'status')
+        }),
+        ('Extra', {
+            'fields': ('isCreated', 'isDeleted'),
+            'classes': ('collapse',)
+        })
+    )
+
 
     def delete_model(self, request, obj):
         """ Мягкое удаление """
