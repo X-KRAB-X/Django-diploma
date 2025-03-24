@@ -37,6 +37,15 @@ class ProfileAdmin(admin.ModelAdmin):
         mark_objects_deleted
     ]
 
+    fieldsets = (
+        ('Информация о пользователе', {
+            'fields': ('user', 'fullName', 'email', 'phone')
+        }),
+        ('Extra', {
+            'fields': ('isDeleted',)
+        })
+    )
+
     def delete_model(self, request, obj):
         """ Мягкое удаление """
         obj.isDeleted = True
