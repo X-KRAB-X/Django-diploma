@@ -53,6 +53,7 @@ class CatalogListView(APIView):
                 .filter(
                     title__icontains=params.get('filter[name]'),
                     price__range=(params.get('filter[minPrice]'), params.get('filter[maxPrice]')),
+                    isDeleted=False
                 )
                 .order_by(
                     # Проверка направления сортировки
@@ -103,7 +104,7 @@ class TagListView(APIView):
 
 class CategoriesListView(APIView):
     def get(self, request: Request) -> Response:
-        categories = Category.objects.select_related('image')
+        categories = Category.objects.select_related('image').filter(isDeleted=False)
         serialized = CategorySerializer(categories, many=True)
 
         return Response(serialized.data)
@@ -114,7 +115,7 @@ class BannersListView(APIView):
         data = []
 
         # Берем по одному товару из первых трех категорий в базе.
-        for category in Category.objects.prefetch_related('product_set')[:3]:
+        for category in Category.objects.prefetch_related('product_set').filter(isDeleted=False)[:3]:
             serialized = ProductShortSerializer(category.product_set.first())
             data.append(serialized.data)
 
@@ -131,6 +132,7 @@ class PopularListView(APIView):
             .prefetch_related('reviews')
             .order_by('sortIndex', '-sold')
             .defer('fullDescription', 'sortIndex')
+            .filter(isDeleted=False)
             [:8]
         )
 
@@ -149,7 +151,7 @@ class LimitedListView(APIView):
             .prefetch_related('tags')
             .prefetch_related('images')
             .prefetch_related('reviews')
-            .filter(limited=True)
+            .filter(limited=True, isDeleted=False)
             .defer('fullDescription', 'sortIndex')
             [:16]
         )
@@ -164,7 +166,7 @@ class SaleProductsListView(APIView):
         paginator = CatalogPagination()
         data = []
 
-        sales = SaleProducts.objects.select_related('product')
+        sales = SaleProducts.objects.select_related('product').filter(product__isDeleted=False)
         page = paginator.paginate_queryset(sales, request, view=self)
 
         for discount in page:
@@ -188,9 +190,9 @@ class SaleProductsListView(APIView):
 class ProductDetailView(APIView):
     def get(self, request: Request, pk: int) -> Response:
         try:
-            product = Product.objects.get(pk=pk)
+            product = Product.objects.filter(isDeleted=False).get(pk=pk)
         except Product.DoesNotExist as e:
-            return Response({'message': f'Product with id: {pk} - not exists.'})
+            return Response({'message': f'Product with id: {pk} - not exists or deleted.'})
 
         serialized = ProductFullSerializer(product)
 
@@ -200,9 +202,9 @@ class ProductDetailView(APIView):
 class ProductDetailReviewView(APIView):
     def post(self, request: Request, pk: int) -> Response:
         try:
-            product = Product.objects.get(pk=pk)
+            product = Product.objects.filter(isDeleted=False).get(pk=pk)
         except Product.DoesNotExist as e:
-            return Response({'message': f'Product with id: {pk} - not exists.'})
+            return Response({'message': f'Product with id: {pk} - not exists or deleted.'})
 
         product.reviews.create(
             author=request.data['author'],
