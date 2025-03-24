@@ -7,6 +7,11 @@ class OrderItemInline(admin.TabularInline):
     model = OrderItem
 
 
+@admin.action(description='Mark order deleted')
+def mark_objects_deleted(modeladmin, request, queryset):
+    queryset.update(isDeleted=True)
+
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     ordering = ['pk']
@@ -31,6 +36,19 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [
         OrderItemInline
     ]
+
+    actions = [
+        mark_objects_deleted
+    ]
+
+    def delete_model(self, request, obj):
+        """ Мягкое удаление """
+        obj.isDeleted = True
+        obj.save()
+
+    def delete_queryset(self, request, queryset):
+        """ Мягкое удаление """
+        queryset.update(isDeleted=True)
 
 
 @admin.register(OrderItem)

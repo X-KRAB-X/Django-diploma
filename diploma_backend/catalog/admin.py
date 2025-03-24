@@ -32,6 +32,11 @@ class SpecificationsInline(admin.StackedInline):
     model = Specifications
 
 
+@admin.action(description='Mark product deleted')
+def mark_objects_deleted(modeladmin, request, queryset):
+    queryset.update(isDeleted=True)
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     ordering = ['pk']
@@ -46,8 +51,7 @@ class ProductAdmin(admin.ModelAdmin):
         'rating',
         'freeDelivery',
         'limited',
-        'sortIndex',
-        'sold',
+        'isDeleted'
     )
     list_display_links = (
         'pk',
@@ -60,6 +64,10 @@ class ProductAdmin(admin.ModelAdmin):
         ProductImagesInline,
         SaleProductInline,
         ProductReviewsInline
+    ]
+
+    actions = [
+        mark_objects_deleted
     ]
 
     readonly_fields = ('date', )
@@ -89,12 +97,22 @@ class ProductAdmin(admin.ModelAdmin):
         else:
             return obj.description
 
+    def delete_model(self, request, obj):
+        """ Мягкое удаление """
+        obj.isDeleted = True
+        obj.save()
+
+    def delete_queryset(self, request, queryset):
+        """ Мягкое удаление """
+        queryset.update(isDeleted=True)
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'title',
+        'isDeleted',
     )
     list_display_links = (
         'pk',
