@@ -87,7 +87,7 @@ class ProductAdmin(admin.ModelAdmin):
             'description': 'Можно изменить принадлежность товара к категории и накинуть новые теги.'
         }),
         ('Extra', {
-            'fields': ('sortIndex',),
+            'fields': ('sortIndex', 'isDeleted'),
             'classes': ('collapse',)
         })
     )
