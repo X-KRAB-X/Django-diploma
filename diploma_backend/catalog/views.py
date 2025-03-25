@@ -206,7 +206,13 @@ class ProductDetailReviewView(APIView):
 
     def post(self, request: Request, pk: int) -> Response:
         try:
-            product = Product.objects.filter(isDeleted=False).get(pk=pk)
+            product = (
+                Product.objects
+                .prefetch_related('reviews')
+                .filter(isDeleted=False)
+                .only('rating')
+                .get(pk=pk)
+            )
         except Product.DoesNotExist as e:
             return Response({'message': f'Product with id: {pk} - not exists or deleted.'})
 

@@ -11,6 +11,8 @@ class BasketItem(models.Model):
     Промежуточная модель с кол-вом товара
     """
     class Meta:
+        verbose_name = 'Basket item'
+        verbose_name_plural = 'Baskets items'
         unique_together = ('basket', 'product')
         ordering = ['pk']
 
@@ -18,9 +20,17 @@ class BasketItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     count = models.PositiveIntegerField(default=1)
 
+    def __str__(self):
+        return f'{self.pk}. Basket {self.basket.pk}. Product {self.product.pk}'
+
 
 class Basket(models.Model):
+    """
+    Корзина пользователя
+    """
     class Meta:
+        verbose_name = 'Basket'
+        verbose_name_plural = 'Baskets'
         ordering = ['pk']
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
