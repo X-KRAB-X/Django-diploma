@@ -94,10 +94,11 @@ class OrderDetailView(APIView):
         # Учитываем стоимость доставки
         if request.data['deliveryType'] == 'express':
             total_cost_upscale = 500
-        elif request.data['deliveryType'] == 'free' and order.totalCost < 2000:
-            total_cost_upscale = 200
-        else:
-            total_cost_upscale = 0
+        elif request.data['deliveryType'] == 'ordinary' or None: # Может быть передано как 'ordinary', так и None
+            if order.first().totalCost < 2000:
+                total_cost_upscale = 200
+            else:
+                total_cost_upscale = 0
 
         # Дописываем все поля из формы
         order.update(

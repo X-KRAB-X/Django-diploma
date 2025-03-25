@@ -57,4 +57,4 @@ class Order(models.Model):
     isDeleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Order {self.pk}. From user {self.user.pk}'
+        return f'Order {self.pk}'
