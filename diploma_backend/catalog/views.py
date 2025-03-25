@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Product, Tag, Category, SaleProducts
 from .serializers import (
@@ -198,6 +199,9 @@ class ProductDetailView(APIView):
 
 
 class ProductDetailReviewView(APIView):
+    # Только для авторизованных пользователей
+    permission_classes = [IsAuthenticated]
+
     def post(self, request: Request, pk: int) -> Response:
         try:
             product = Product.objects.get(pk=pk)
