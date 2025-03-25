@@ -10,12 +10,29 @@ class OrderItem(models.Model):
     Промежуточная модель с кол-вом товара
     """
 
+    class Meta:
+        verbose_name = 'Order item'
+        verbose_name_plural = 'Order items'
+        ordering = ['pk']
+
     order = models.ForeignKey('Order', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     count = models.PositiveIntegerField(default=1)
 
+    def __str__(self):
+        return f'Order item {self.pk}. Order {self.order.pk}'
+
 
 class Order(models.Model):
+    """
+    Заказ пользователя
+    """
+
+    class Meta:
+        verbose_name = 'Order'
+        verbose_name_plural = 'Orders'
+        ordering = ['pk', 'user']
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     createdAt = models.DateTimeField(auto_now_add=True)
     fullName = models.CharField(max_length=150, null=True, blank=True)
@@ -38,3 +55,6 @@ class Order(models.Model):
     isCreated = models.BooleanField(default=False)
 
     isDeleted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'Order {self.pk}. From user {self.user.pk}'
