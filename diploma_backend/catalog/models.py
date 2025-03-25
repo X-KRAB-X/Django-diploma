@@ -29,6 +29,16 @@ class Category(models.Model):
         ]
 
     title = models.CharField(max_length=30, db_index=True)
+    isDeleted = models.BooleanField(default=False)
+
+    def delete_model(self, request, obj):
+        """ Мягкое удаление """
+        obj.isDeleted = True
+        obj.save()
+
+    def delete_queryset(self, request, queryset):
+        """ Мягкое удаление """
+        queryset.update(isDeleted=True)
 
     def __str__(self):
         return f'{self.pk}. {self.title}'
@@ -86,6 +96,8 @@ class Product(models.Model):
     limited = models.BooleanField(default=False)
 
     sold = models.PositiveIntegerField(default=0)
+
+    isDeleted = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.pk}. {self.title}: ${self.price}'

@@ -18,7 +18,7 @@ class OrdersView(APIView):
     def get(self, request: Request) -> Response:
 
         # Заказы с датой по убыванию
-        orders = Order.objects.filter(user=request.user).order_by('-createdAt')
+        orders = Order.objects.filter(user=request.user, isDeleted=False).order_by('-createdAt')
 
         serialized = OrderSerializer(orders, many=True)
 
@@ -39,7 +39,7 @@ class OrdersView(APIView):
 
         # Если он был успешно оформлен(isCreated = True), то создаем новый.
         # Иначе - возвращаем id последнего.
-        check_order = Order.objects.filter(user=request.user).only('isCreated').last()
+        check_order = Order.objects.filter(user=request.user, isDeleted=False).only('isCreated').last()
         if check_order and not check_order.isCreated:
             return Response({'orderId': check_order.pk})
 
