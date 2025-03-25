@@ -52,7 +52,7 @@ def _get_basket(request: Request) -> tuple[Basket, bool]:
                 if cookie_basket.exists():
                     if cookie_basket.first().basketitem_set.exists():
                         # Передаем объекты пользователю
-                        basket.basketitem_set.set(cookie_basket.basketitem_set)
+                        basket.basketitem_set.set(cookie_basket.first().basketitem_set.all())
 
             # Очистка анонимной корзины
             elif basket_key:
