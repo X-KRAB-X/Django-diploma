@@ -57,20 +57,23 @@ class AuthSignUpView(APIView):
 
         # Регистрация
 
-        # Создаем в базе новый объект пользователя
-        User.objects.create_user(
-            username=data['username'],
-            password=data['password'],
-            first_name=data['name']
-        )
+        # Проверяем, что пользователя с таким именем нет.
+        check_user = User.objects.filter(username=data['username']).only('username')
+        if not check_user.exists():
 
-        user = authenticate(request, username=data['username'], password=data['password'])
-        if user is not None:
+            # Создаем в базе новый объект пользователя
+            user = User.objects.create_user(
+                username=data['username'],
+                password=data['password'],
+                first_name=data['name']
+            )
 
             # Создаем профиль
             Profile.objects.create(user=user)
 
             login(request, user)
+        else:
+            return Response({'message': 'username not available'}, status=500)
 
         return Response({}, status=200)
 
