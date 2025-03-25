@@ -67,6 +67,9 @@ class OrdersView(APIView):
 
 
 class OrderDetailView(APIView):
+    # Только для авторизованных пользователей
+    permission_classes = [IsAuthenticated]
+
     def get(self, request: Request, pk) -> Response:
 
         # Заказ по id
@@ -109,6 +112,8 @@ class OrderDetailView(APIView):
 
 
 class PaymentView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request: Request, pk) -> Response:
         data = request.data
 
