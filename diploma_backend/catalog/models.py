@@ -1,5 +1,3 @@
-from operator import truediv
-
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -48,9 +46,17 @@ class CategoryImage(models.Model):
     """
     Изображение категории
     """
+    class Meta:
+        verbose_name = 'Category image'
+        verbose_name_plural = 'Category images'
+        ordering = ['pk']
+
     category = models.OneToOneField(Category, on_delete=models.CASCADE, related_name='image', db_index=True)
     src = models.ImageField(null=True, blank=True, upload_to=upload_category_image_to)
     alt = models.CharField(max_length=100, default='Not Found.')
+
+    def __str__(self):
+        return f'CategoryImage {self.pk}. Category {self.category.pk}'
 
 
 class Tag(models.Model):
@@ -58,10 +64,9 @@ class Tag(models.Model):
     Тег
     """
     class Meta:
-        ordering = [
-            'pk',
-            'name'
-        ]
+        verbose_name = 'Tag'
+        verbose_name_plural = 'Tags'
+        ordering = ['pk', 'name']
 
     name = models.CharField(max_length=30, db_index=True)
 
@@ -74,10 +79,9 @@ class Product(models.Model):
     Товар
     """
     class Meta:
-        ordering = [
-            'pk',
-            'title'
-        ]
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+        ordering = ['pk', 'title']
 
     title = models.CharField(max_length=50, db_index=True)
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2)
@@ -107,9 +111,17 @@ class ProductImage(models.Model):
     """
     Изображение товара
     """
+    class Meta:
+        verbose_name = 'Product image'
+        verbose_name_plural = 'Product images'
+        ordering = ['pk']
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', db_index=True)
     src = models.ImageField(null=True, blank=True, upload_to=upload_product_image_to)
     alt = models.CharField(max_length=100, default='Not Found.')
+
+    def __str__(self):
+        return f'Product image {self.pk}. Product {self.product.pk}'
 
 
 class Reviews(models.Model):
@@ -119,10 +131,7 @@ class Reviews(models.Model):
     class Meta:
         verbose_name = 'Review'
         verbose_name_plural = 'Reviews'
-        ordering = [
-            'pk',
-            'product'
-        ]
+        ordering = ['pk', 'product']
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews', db_index=True)
     author = models.CharField(max_length=40, db_index=True)
@@ -130,6 +139,9 @@ class Reviews(models.Model):
     text = models.TextField(blank=True, null=False)
     rate = models.IntegerField(choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)], blank=False, null=False, validators=[MaxValueValidator(5), MinValueValidator(1)])
     date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Review {self.pk}. Product {self.product.pk}'
 
 
 class Specifications(models.Model):
@@ -139,14 +151,14 @@ class Specifications(models.Model):
     class Meta:
         verbose_name = 'Specification'
         verbose_name_plural = 'Specifications'
-        ordering = [
-            'pk',
-            'product'
-        ]
+        ordering = ['pk', 'product']
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='specifications', db_index=True)
     name = models.CharField(max_length=30, db_index=True)
     value = models.TextField(blank=True, null=False)
+
+    def __str__(self):
+        return f'Specification {self.pk}. Product {self.product.pk}'
 
 
 class SaleProducts(models.Model):
@@ -162,3 +174,6 @@ class SaleProducts(models.Model):
     salePrice = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     dateFrom = models.DateField(auto_now_add=True)
     dateTo = models.DateField(blank=False, null=False)
+
+    def __str__(self):
+        return f'Sale {self.pk}. Product {self.product.pk}'

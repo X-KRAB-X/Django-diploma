@@ -158,13 +158,18 @@ class BasketView(APIView):
             if request.data['count'] < 0 or not isinstance(request.data['count'], int):
                 raise ValueError
 
-            # Получаем QuerySet с одним товаром в корзине, а также его кол-во
-            basket_item_queryset = basket.basketitem_set.filter(product_id=request.data['id'])
+            # Получаем QuerySet с одним товаром в корзине
+            basket_item_queryset = (
+                basket.basketitem_set
+                .filter(product_id=request.data['id'])
+                .prefetch_related('product')
+            )
 
             # Проверяем что товар есть в корзине, иначе добавляем
             if not basket_item_queryset.exists():
                 basket.basketitem_set.create(product_id=request.data['id'], count=0)
 
+            # Кол-во товара в корзине
             count = basket_item_queryset.first().count
 
             # Обновляем QuerySet путем увеличения кол-ва товара
@@ -204,7 +209,11 @@ class BasketView(APIView):
                 raise ValueError
 
             # Получаем QuerySet с одним товаром в корзине, а также его кол-во
-            basket_item_queryset = basket.basketitem_set.filter(product_id=request.data['id'])
+            basket_item_queryset = (
+                basket.basketitem_set
+                .filter(product_id=request.data['id'])
+                .prefetch_related('product')
+            )
             count = basket_item_queryset.first().count
 
             # Если приходит запрос с кол-вом равным текущему или более - товар удаляется из корзины
