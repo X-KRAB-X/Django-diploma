@@ -33,7 +33,7 @@ class Order(models.Model):
         verbose_name_plural = 'Orders'
         ordering = ['pk', 'user']
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order', blank=True, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     fullName = models.CharField(max_length=150, null=True, blank=True)
     email = models.EmailField(max_length=254, null=True, blank=True)

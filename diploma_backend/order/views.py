@@ -1,18 +1,20 @@
+from django.contrib.auth.models import AnonymousUser
 from django.db.transaction import atomic
 from django.db.models import F
 
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from .models import Order, OrderItem
 from .serializers import OrderSerializer
+from .permissons import OrderHistoryPermission
 
 
 class OrdersView(APIView):
-    # Только для авторизованных пользователей
-    permission_classes = [IsAuthenticated]
+    # Только авторизованные пользователи могут смотреть историю заказов
+    permission_classes = [OrderHistoryPermission]
 
     # Страница с историей заказов
     def get(self, request: Request) -> Response:
@@ -31,25 +33,30 @@ class OrdersView(APIView):
     @atomic
     def post(self, request: Request) -> Response:
 
-        # Получаем профиль во избежание множества запросов.
-        profile = request.user.profile
+        # Если пользователь анонимный - создаем пустой заказ
+        # Иначе - заполняем его всеми возможными данными.
+        if isinstance(request.user, AnonymousUser):
+            order = Order.objects.create()
+        else:
+            # Получаем профиль во избежание множества запросов.
+            profile = request.user.profile
 
-        # Здесь идет проверка последнего заказа у пользователя
-        # потому как если нажимать "Оформить" и возвращаться назад - будут появляться лишние объекты.
+            # Здесь идет проверка последнего заказа у пользователя
+            # потому как если нажимать "Оформить" и возвращаться назад - будут появляться лишние объекты.
 
-        # Если он был успешно оформлен(isCreated = True), то создаем новый.
-        # Иначе - возвращаем id последнего.
-        check_order = Order.objects.filter(user=request.user, isDeleted=False).only('isCreated').last()
-        if check_order and not check_order.isCreated:
-            return Response({'orderId': check_order.pk})
+            # Если он был успешно оформлен(isCreated = True), то создаем новый.
+            # Иначе - возвращаем id последнего.
+            check_order = Order.objects.filter(user=request.user, isDeleted=False).only('isCreated').last()
+            if check_order and not check_order.isCreated:
+                return Response({'orderId': check_order.pk})
 
-        # Создаем объект заказа для его заполнения.
-        order = Order.objects.create(
-            user=request.user,
-            fullName=profile.fullName,
-            email = profile.email,
-            phone = profile.phone,
-        )
+            # Создаем объект заказа для его заполнения.
+            order = Order.objects.create(
+                user=request.user,
+                fullName=profile.fullName,
+                email = profile.email,
+                phone = profile.phone,
+            )
 
         # Наполняем заказ товарами из корзины и считаем стоимость.
         total_cost = 0
@@ -67,8 +74,8 @@ class OrdersView(APIView):
 
 
 class OrderDetailView(APIView):
-    # Только для авторизованных пользователей
-    permission_classes = [IsAuthenticated]
+    # Подтвердить заказ могут только авторизованные пользователи
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request: Request, pk) -> Response:
 
@@ -94,6 +101,7 @@ class OrderDetailView(APIView):
 
         # Дописываем все поля из формы
         order.update(
+            user=request.user,
             fullName=request.data['fullName'],
             email=request.data['email'],
             phone=request.data['phone'],
