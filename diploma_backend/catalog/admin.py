@@ -124,6 +124,16 @@ class CategoryAdmin(admin.ModelAdmin):
         CategoryImagesInline
     ]
 
+    fieldsets = (
+        ('Название', {
+            'fields': ('title',)
+        }),
+        ('Extra', {
+            'fields': ('isDeleted',),
+            'classes': ('collapse',)
+        })
+    )
+
 
 @admin.register(CategoryImage)
 class CategoryImageAdmin(admin.ModelAdmin):
@@ -177,7 +187,18 @@ class ReviewsAdmin(admin.ModelAdmin):
     )
     list_display_links = (
         'pk',
+        'product',
         'author',
+    )
+
+    readonly_fields = ('date',)
+    fieldsets = (
+        ('Информация о пользователе', {
+            'fields': ('author', 'email')
+        }),
+        ('Отзыв и оценка', {
+            'fields': ('date', 'text', 'rate')
+        })
     )
 
 
@@ -195,6 +216,15 @@ class SpecificationsAdmin(admin.ModelAdmin):
         'name'
     )
 
+    fieldsets = (
+        ('Название товара', {
+            'fields': ('product',)
+        }),
+        ('Характеристика', {
+            'fields': ('name', 'value')
+        })
+    )
+
 
 @admin.register(SaleProducts)
 class SaleProductAdmin(admin.ModelAdmin):
@@ -210,4 +240,14 @@ class SaleProductAdmin(admin.ModelAdmin):
     list_display_links = (
         'pk',
         'product'
+    )
+
+    readonly_fields = ('dateFrom',)
+    fieldsets = (
+        ('Название товара', {
+            'fields': ('product',)
+        }),
+        ('Скидочная цена и длительность', {
+            'fields': ('salePrice', 'dateFrom', 'dateTo')
+        })
     )
