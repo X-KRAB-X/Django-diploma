@@ -8,7 +8,7 @@ class OrderItemInline(admin.TabularInline):
 
 
 @admin.action(description='Mark order undeleted')
-def mark_objects_deleted(modeladmin, request, queryset):
+def mark_objects_undeleted(modeladmin, request, queryset):
     queryset.update(isDeleted=False)
     modeladmin.message_user(request, 'Заказы успешно помечены как актуальные.', messages.SUCCESS)
 
@@ -39,7 +39,7 @@ class OrderAdmin(admin.ModelAdmin):
     ]
 
     actions = [
-        mark_objects_deleted
+        mark_objects_undeleted
     ]
 
     readonly_fields = ('createdAt',)

@@ -8,7 +8,7 @@ class ProfileImageInline(admin.TabularInline):
 
 
 @admin.action(description='Mark profile undeleted')
-def mark_objects_deleted(modeladmin, request, queryset):
+def mark_objects_undeleted(modeladmin, request, queryset):
     queryset.update(isDeleted=False)
     modeladmin.message_user(request, 'Профили успешно помечены как актуальные.', messages.SUCCESS)
 
@@ -34,7 +34,7 @@ class ProfileAdmin(admin.ModelAdmin):
     ]
 
     actions = [
-        mark_objects_deleted
+        mark_objects_undeleted
     ]
 
     fieldsets = (
