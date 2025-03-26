@@ -33,9 +33,14 @@ class SpecificationsInline(admin.StackedInline):
 
 
 @admin.action(description='Mark product undeleted')
-def mark_objects_deleted(modeladmin, request, queryset):
+def mark_product_objects_undeleted(modeladmin, request, queryset):
     queryset.update(isDeleted=False)
     modeladmin.message_user(request, 'Товары успешно помечены как актуальные.', messages.SUCCESS)
+
+@admin.action(description='Mark category undeleted')
+def mark_category_objects_undeleted(modeladmin, request, queryset):
+    queryset.update(isDeleted=False)
+    modeladmin.message_user(request, 'Категории успешно помечены как актуальные.', messages.SUCCESS)
 
 
 @admin.register(Product)
@@ -68,7 +73,7 @@ class ProductAdmin(admin.ModelAdmin):
     ]
 
     actions = [
-        mark_objects_deleted
+        mark_product_objects_undeleted
     ]
 
     readonly_fields = ('date', )
@@ -133,6 +138,19 @@ class CategoryAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         })
     )
+
+    actions = [
+        mark_category_objects_undeleted
+    ]
+
+    def delete_model(self, request, obj):
+        """ Мягкое удаление """
+        obj.isDeleted = True
+        obj.save()
+
+    def delete_queryset(self, request, queryset):
+        """ Мягкое удаление """
+        queryset.update(isDeleted=True)
 
 
 @admin.register(CategoryImage)
