@@ -20,7 +20,12 @@ class OrdersView(APIView):
     def get(self, request: Request) -> Response:
 
         # Заказы с датой по убыванию
-        orders = Order.objects.filter(user=request.user, isDeleted=False).order_by('-createdAt')
+        orders = (
+            Order.objects
+            .prefetch_related('orderitem_set') # Для сериализатора нужен только `orderitem_set`
+            .filter(user=request.user, isDeleted=False)
+            .order_by('-createdAt')
+        )
 
         serialized = OrderSerializer(orders, many=True)
 
@@ -80,7 +85,11 @@ class OrderDetailView(APIView):
     def get(self, request: Request, pk) -> Response:
 
         # Заказ по id
-        order = Order.objects.prefetch_related('product').get(pk=pk)
+        order = (
+            Order.objects
+            .prefetch_related('orderitem_set') # Для сериализатора нужен только `orderitem_set`
+            .get(pk=pk)
+        )
 
         serialized = OrderSerializer(order)
 

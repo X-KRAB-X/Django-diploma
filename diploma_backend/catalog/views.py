@@ -167,7 +167,12 @@ class SaleProductsListView(APIView):
         paginator = CatalogPagination()
         data = []
 
-        sales = SaleProducts.objects.select_related('product').filter(product__isDeleted=False)
+        sales = (
+            SaleProducts.objects
+            .select_related('product')
+            .prefetch_related('product__images')
+            .filter(product__isDeleted=False)
+        )
         page = paginator.paginate_queryset(sales, request, view=self)
 
         for discount in page:
@@ -191,7 +196,16 @@ class SaleProductsListView(APIView):
 class ProductDetailView(APIView):
     def get(self, request: Request, pk: int) -> Response:
         try:
-            product = Product.objects.filter(isDeleted=False).get(pk=pk)
+            product = (
+                Product.objects
+                .select_related('category')
+                .prefetch_related('tags')
+                .prefetch_related('reviews')
+                .prefetch_related('images')
+                .prefetch_related('specifications')
+                .filter(isDeleted=False)
+                .get(pk=pk)
+            )
         except Product.DoesNotExist as e:
             return Response({'message': f'Product with id: {pk} - not exists or deleted.'})
 
@@ -210,7 +224,7 @@ class ProductDetailReviewView(APIView):
                 Product.objects
                 .prefetch_related('reviews')
                 .filter(isDeleted=False)
-                .only('rating')
+                .only('rating', 'reviews')
                 .get(pk=pk)
             )
         except Product.DoesNotExist as e:
