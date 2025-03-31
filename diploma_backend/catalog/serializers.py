@@ -56,8 +56,34 @@ class TagSerializer(serializers.ModelSerializer):
         )
 
 
-# Возможно придется переименовать
+class ReviewsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reviews
+        fields = (
+            'author',
+            'email',
+            'text',
+            'rate',
+            'date'
+        )
+
+
+class SpecificationsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Specifications
+        fields = (
+            'name',
+            'value'
+        )
+
+
 class ProductShortSerializer(serializers.ModelSerializer):
+    """
+    Краткий сериализатор товара для вкладки каталога.
+    Включает все поля кроме `fullDescription`, `specifications`, служебные поля,
+    а также заместо отзывов только их кол-во.
+    """
+
     tags = TagSerializer(many=True)
     images = ProductImageSerializer(many=True)
     reviews = serializers.SerializerMethodField()
@@ -81,3 +107,47 @@ class ProductShortSerializer(serializers.ModelSerializer):
 
     def get_reviews(self, obj):
         return obj.reviews.count()
+
+
+class ProductFullSerializer(serializers.ModelSerializer):
+    """
+    Полный сериализатор товара для страницы подробного описания.
+    Содержит все поля, кроме служебных.
+    """
+
+    tags = TagSerializer(many=True)
+    images = ProductImageSerializer(many=True)
+    reviews = ReviewsSerializer(many=True)
+    specifications = SpecificationsSerializer(many=True)
+
+    class Meta:
+        model = Product
+        fields = (
+            'id',
+            'category',
+            'price',
+            'count',
+            'date',
+            'title',
+            'description',
+            'fullDescription',
+            'freeDelivery',
+            'images',
+            'tags',
+            'reviews',
+            'specifications',
+            'rating',
+        )
+
+
+class SaleProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True)
+
+    class Meta:
+        model = Product
+        fields = (
+            'id',
+            'price',
+            'title',
+            'images'
+        )
