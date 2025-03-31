@@ -69,9 +69,16 @@ class OrderSerializer(serializers.ModelSerializer):
         """
 
         data = []
-        for order_item in obj.orderitem_set.prefetch_related('product'):
-
-            # Сериализуем каждый товар
+        for order_item in (
+            # Оптимизируем запрос
+            obj.orderitem_set
+            .prefetch_related('product')
+            .select_related('product__category')
+            .prefetch_related('product__tags')
+            .prefetch_related('product__images')
+            .prefetch_related('product__reviews')
+            .defer('product__count')
+        ):
             serialized = _OrderProductSerializer(order_item.product)
 
             # Добавляем в data ключ count, перед этим копируем словарь из сериализатора

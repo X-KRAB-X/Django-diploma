@@ -118,7 +118,16 @@ def _basket_serialize(basket) -> list:
     basket_data = []
 
     # Проходимся по списку отсортированных товаров
-    for basket_item in basket.basketitem_set.prefetch_related('product').order_by('product'):
+    for basket_item in (
+        # Оптимизируем запрос
+        basket.basketitem_set
+        .prefetch_related('product')
+        .select_related('product__category')
+        .prefetch_related('product__tags')
+        .prefetch_related('product__reviews')
+        .prefetch_related('product__images')
+        .order_by('product')
+    ):
         serialized = BasketProductSerializer(basket_item.product)
 
         # Добавляем в data ключ count, перед этим копируем словарь из сериализатора

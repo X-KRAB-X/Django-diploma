@@ -18,7 +18,7 @@ class ProfileView(APIView):
         # Ловим ошибку отсутствующего профиля и создаем его.
         # Возможно если User был создан за пределами сайта, например в админке
         try:
-            profile = request.user.profile
+            profile = Profile.objects.select_related('avatar').get(user=request.user)
         except Profile.DoesNotExist:
             profile = Profile.objects.create(user=request.user)
 
@@ -31,7 +31,7 @@ class ProfileView(APIView):
         # Ловим ошибку отсутствующего профиля и создаем его.
         # Возможно если User был создан за пределами сайта, например в админке
         try:
-            profile = request.user.profile
+            profile = Profile.objects.filter(user=request.user).select_related('avatar').first()
         except Profile.DoesNotExist:
             profile = Profile.objects.create(user=request.user)
 
