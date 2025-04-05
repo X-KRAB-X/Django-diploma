@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -57,6 +59,31 @@ class CategoryImage(models.Model):
 
     def __str__(self):
         return f'CategoryImage {self.pk}. Category {self.category.pk}'
+
+    def save(self, *args, **kwargs):
+        """
+        Переопределяем метод сохранения модели.
+        Добавлен функционал очистки неиспользуемых файлов.
+        """
+
+        # Получаем предыдущее изображение.
+        try:
+            old_obj = CategoryImage.objects.get(pk=self.pk)
+            old_image = old_obj.src
+        except CategoryImage.DoesNotExist:
+            old_image = None
+
+        # Сохраняем с текущим изображением
+        super().save(*args, **kwargs)
+
+        current_image = self.src
+
+        # Будет работать только в случае появления нового файла, т.е. загрузки нового изображения.
+        # Даже если будет загружен такой же файл,
+        # Django не позволит им находиться в одной папке и добавит в название "соль" => старый файл удалится.
+        if current_image != old_image and old_image:
+            if os.path.isfile(old_image.path):
+                os.remove(old_image.path)
 
 
 class Tag(models.Model):
