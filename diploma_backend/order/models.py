@@ -15,8 +15,8 @@ class OrderItem(models.Model):
         verbose_name_plural = 'Order items'
         ordering = ['pk']
 
-    order = models.ForeignKey('Order', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, db_index=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, db_index=True)
     count = models.PositiveIntegerField(default=1)
 
     def __str__(self):
@@ -33,7 +33,7 @@ class Order(models.Model):
         verbose_name_plural = 'Orders'
         ordering = ['pk', 'user']
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order', blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order', blank=True, null=True, db_index=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     fullName = models.CharField(max_length=150, null=True, blank=True)
     email = models.EmailField(max_length=254, null=True, blank=True)
