@@ -82,11 +82,8 @@ class ProfileAvatarView(APIView):
 
             # Проверяем, что у профиля есть аватар.
             # Если нет - создаем новый
-            try:
-                avatar = profile.avatar
-                avatar.src = request.FILES['avatar']
-                avatar.save()
-            except ProfileImage.DoesNotExist:
-                avatar = ProfileImage.objects.create(profile=profile, src=request.FILES['avatar'])
+            avatar, created = ProfileImage.objects.get_or_create(profile=profile)
+            avatar.src = request.FILES['avatar']
+            avatar.save()
 
         return Response({}, status=200)
