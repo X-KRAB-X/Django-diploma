@@ -1,0 +1,1299 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "title": "Sport",
+      "isDeleted": false
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "title": "Аудиотехника",
+      "isDeleted": false
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "title": "Бытовая техника",
+      "isDeleted": false
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "title": "Смартфоны",
+      "isDeleted": false
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "title": "Аксессуары",
+      "isDeleted": false
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "title": "Книги",
+      "isDeleted": false
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 1,
+    "fields": {
+      "category": 4,
+      "src": "category_images/category_4/896656c5501144f190c80561fc1029f9.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "src": "category_images/category_1/a249123e86fc30b348ef69a6c4a3d960.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 3,
+    "fields": {
+      "category": 2,
+      "src": "category_images/category_2/e5c34ef85d47dbdc60c2215ca516e5af.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 4,
+    "fields": {
+      "category": 3,
+      "src": "category_images/category_3/83956303d11cc99c86c351b8e767b48d.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 5,
+    "fields": {
+      "category": 5,
+      "src": "category_images/category_5/d4d2cea48642ee202311f2122c617ad6.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.categoryimage",
+    "pk": 6,
+    "fields": {
+      "category": 6,
+      "src": "category_images/category_6/cfdce800efc595f261c1b57aedcf6d37.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Kids"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Наушники"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Музыка"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 4,
+    "fields": {
+      "name": "Смартфон"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 5,
+    "fields": {
+      "name": "Телефон"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 6,
+    "fields": {
+      "name": "Рюкзак"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 7,
+    "fields": {
+      "name": "Аксессуар"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 8,
+    "fields": {
+      "name": "Литература"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 9,
+    "fields": {
+      "name": "Кофемашина"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 10,
+    "fields": {
+      "name": "Бег"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 11,
+    "fields": {
+      "name": "Стиль"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 12,
+    "fields": {
+      "name": "Кухня"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 13,
+    "fields": {
+      "name": "Уют"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 14,
+    "fields": {
+      "name": "Игры"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 15,
+    "fields": {
+      "name": "Подарок"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "title": "Самокат",
+      "price": "1000.00",
+      "count": 15,
+      "date": "2025-02-07T12:47:21.561Z",
+      "description": "Самый лучший который можно только представить в своей тяжелой жизни.",
+      "fullDescription": "Самый лучший который можно только представить в своей тяжелой жизни.\r\nИ еще лучше!",
+      "rating": "4.0",
+      "freeDelivery": true,
+      "category": 1,
+      "sortIndex": 1,
+      "limited": true,
+      "sold": 6,
+      "isDeleted": false,
+      "tags": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "title": "Беспроводные наушники Sony WH-1000XM5",
+      "price": "349.99",
+      "count": 50,
+      "date": "2025-02-12T10:33:54.101Z",
+      "description": "Премиальные беспроводные наушники с лучшим в индустрии шумоподавлением.",
+      "fullDescription": "Sony WH-1000XM5 - это флагманские беспроводные наушники, предлагающие непревзойденное качество звука, исключительное шумоподавление и удобную посадку. Благодаря новым драйверам и улучшенному алгоритму шумоподавления, они обеспечивают кристально чистое звучание и блокируют окружающий шум, позволяя полностью погрузиться в музыку. Поддерживают Bluetooth 5.2, Multipoint Connection, и кодеки LDAC, AAC и SBC. Время автономной работы до 30 часов.",
+      "rating": "3.7",
+      "freeDelivery": true,
+      "category": 2,
+      "sortIndex": 1,
+      "limited": false,
+      "sold": 11,
+      "isDeleted": false,
+      "tags": [
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "title": "Кофемашина Philips Series 5400 LatteGo",
+      "price": "799.00",
+      "count": 25,
+      "date": "2025-02-12T10:50:30.069Z",
+      "description": "Автоматическая кофемашина для приготовления напитков одним нажатием кнопки.",
+      "fullDescription": "Philips Series 5400 LatteGo - это автоматическая кофемашина, которая позволяет легко приготовить широкий спектр кофейных напитков, включая эспрессо, капучино, латте макиато и другие. Благодаря запатентованной системе LatteGo, молочная пена получается плотной и нежной, а очистка системы занимает всего несколько секунд. Кофемашина оснащена керамическими жерновами, которые обеспечивают равномерный помол и сохраняют аромат кофейных зерен.",
+      "rating": "3.3",
+      "freeDelivery": true,
+      "category": 3,
+      "sortIndex": 5,
+      "limited": false,
+      "sold": 1,
+      "isDeleted": false,
+      "tags": [
+        9
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "title": "Смартфон Samsung Galaxy S23 Ultra 256GB",
+      "price": "1199.00",
+      "count": 15,
+      "date": "2025-02-12T11:04:08.442Z",
+      "description": "Флагманский смартфон с невероятной камерой и мощным процессором.",
+      "fullDescription": "Samsung Galaxy S23 Ultra - это вершина мобильных технологий, предлагающая потрясающую камеру с разрешением 200 Мп, мощный процессор Snapdragon 8 Gen 2 для Galaxy и яркий Dynamic AMOLED 2X дисплей с частотой обновления 120 Гц. Встроенный стилус S Pen расширяет возможности использования смартфона. 256GB встроенной памяти достаточно для хранения большого количества фотографий, видео и приложений.",
+      "rating": "4.9",
+      "freeDelivery": true,
+      "category": 4,
+      "sortIndex": 1,
+      "limited": true,
+      "sold": 4,
+      "isDeleted": false,
+      "tags": [
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "title": "Рюкзак городской Xiaomi Mi City Backpack 2",
+      "price": "39.99",
+      "count": 100,
+      "date": "2025-02-12T11:05:37.392Z",
+      "description": "Стильный и функциональный городской рюкзак для повседневного использования.",
+      "fullDescription": "Xiaomi Mi City Backpack 2 - это легкий и прочный городской рюкзак, изготовленный из водоотталкивающей ткани. Он имеет несколько отделений для удобной организации вещей, включая отделение для ноутбука до 15.6 дюймов. Эргономичная спинка и регулируемые лямки обеспечивают комфорт при ношении. Минималистичный дизайн подходит для любого стиля.",
+      "rating": "4.6",
+      "freeDelivery": false,
+      "category": 5,
+      "sortIndex": 4,
+      "limited": true,
+      "sold": 4,
+      "isDeleted": false,
+      "tags": [
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "title": "Книга “Мастер и Маргарита” Михаил Булгаков",
+      "price": "12.50",
+      "count": 200,
+      "date": "2025-02-12T11:06:15.790Z",
+      "description": "Культовый роман Михаила Булгакова о любви, добре и зле.",
+      "fullDescription": "“Мастер и Маргарита” - это один из самых известных и любимых романов Михаила Булгакова, сочетающий в себе элементы сатиры, фантастики, мистики и любовной истории. Действие романа разворачивается в Москве 1930-х годов и повествует о визите Воланда и его свиты, а также о трагической судьбе Мастера и его возлюбленной Маргариты.",
+      "rating": "4.9",
+      "freeDelivery": false,
+      "category": 6,
+      "sortIndex": 7,
+      "limited": true,
+      "sold": 15,
+      "isDeleted": false,
+      "tags": [
+        8
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "title": "Беговые кроссовки Adidas Ultraboost 22",
+      "price": "180.00",
+      "count": 20,
+      "date": "2025-03-26T12:10:18.032Z",
+      "description": "Кроссовки для бега с амортизацией Boost для максимального комфорта.",
+      "fullDescription": "Adidas Ultraboost 22 – это кроссовки премиум-класса, созданные для бегунов, ценящих комфорт и амортизацию. Подошва Boost обеспечивает невероятную отдачу энергии, позволяя вам бежать дольше и с меньшей усталостью. Верх Primeknit+ плотно облегает стопу, обеспечивая поддержку и воздухопроницаемость. Идеальный выбор для ежедневных тренировок и длительных пробежек.",
+      "rating": "4.6",
+      "freeDelivery": true,
+      "category": 1,
+      "sortIndex": 3,
+      "limited": true,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        10,
+        11
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "title": "Рюкзак спортивный Nike Brasilia Training Backpack",
+      "price": "45.00",
+      "count": 30,
+      "date": "2025-03-26T12:17:05.588Z",
+      "description": "Прочный и вместительный рюкзак для тренировок.",
+      "fullDescription": "Nike Brasilia Training Backpack – это надежный и функциональный рюкзак для переноски спортивной экипировки. Основное отделение достаточно вместительное для одежды, обуви и других вещей. Внешние карманы обеспечивают быстрый доступ к необходимым мелочам, таким как бутылка с водой или телефон. Прочная конструкция из полиэстера гарантирует долговечность.",
+      "rating": "4.2",
+      "freeDelivery": true,
+      "category": 1,
+      "sortIndex": 5,
+      "limited": true,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "title": "Портативная колонка Marshall Emberton II",
+      "price": "170.00",
+      "count": 15,
+      "date": "2025-03-26T12:18:38.462Z",
+      "description": "Компактная и стильная колонка с легендарным звуком Marshall.",
+      "fullDescription": "Marshall Emberton II – это портативная колонка, сочетающая в себе культовый дизайн Marshall и мощный звук. Несмотря на компактные размеры, она обеспечивает насыщенное и чистое звучание. Благодаря защите от воды по стандарту IP67, колонку можно брать с собой на пляж или в бассейн. Время работы от одного заряда – до 30 часов.",
+      "rating": "4.7",
+      "freeDelivery": true,
+      "category": 2,
+      "sortIndex": 5,
+      "limited": false,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "title": "Беспроводные наушники Sony WF-C500",
+      "price": "70.00",
+      "count": 25,
+      "date": "2025-03-26T12:19:43.404Z",
+      "description": "Компактные беспроводные наушники с хорошим звучанием и длительным временем работы.",
+      "fullDescription": "Sony WF-C500 – это отличный выбор для тех, кто ищет недорогие и качественные беспроводные наушники. Они обеспечивают сбалансированное звучание, удобную посадку и защиту от пота и брызг. Благодаря технологии DSEE (Digital Sound Enhancement Engine), наушники восстанавливают высокие частоты, потерянные при сжатии музыки. Время работы от одного заряда – до 10 часов.",
+      "rating": "4.3",
+      "freeDelivery": true,
+      "category": 2,
+      "sortIndex": 2,
+      "limited": true,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+      "title": "Блендер KitchenAid Artisan K400",
+      "price": "350.00",
+      "count": 8,
+      "date": "2025-03-26T12:22:24.796Z",
+      "description": "Мощный и стильный блендер для приготовления смузи и коктейлей.",
+      "fullDescription": "KitchenAid Artisan K400 – это блендер премиум-класса, сочетающий в себе мощность, стиль и функциональность. Он оснащен мощным двигателем и уникальным асимметричным ножом, которые обеспечивают быстрое и эффективное измельчение ингредиентов. Блендер идеально подходит для приготовления смузи, коктейлей, соусов и многого другого. Корпус из литого металла обеспечивает долговечность и устойчивость.",
+      "rating": "4.8",
+      "freeDelivery": true,
+      "category": 3,
+      "sortIndex": 8,
+      "limited": true,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+      "title": "Тостер Smeg TSF01",
+      "price": "200.00",
+      "count": 12,
+      "date": "2025-03-26T12:23:43.537Z",
+      "description": "Стильный тостер в ретро-дизайне.",
+      "fullDescription": "Smeg TSF01 – это тостер, который станет украшением вашей кухни. Он выполнен в ретро-дизайне 50-х годов и доступен в различных цветах. Тостер оснащен двумя широкими отделениями для тостов и имеет 6 степеней поджаривания. Функции разморозки и подогрева позволяют использовать тостер для различных целей.",
+      "rating": "4.5",
+      "freeDelivery": true,
+      "category": 3,
+      "sortIndex": 2,
+      "limited": true,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 13,
+    "fields": {
+      "title": "Google Pixel 7 Pro",
+      "price": "900.00",
+      "count": 10,
+      "date": "2025-03-26T12:24:57.098Z",
+      "description": "Смартфон с отличной камерой и чистым Android.",
+      "fullDescription": "Google Pixel 7 Pro – это флагманский смартфон от Google, оснащенный передовой камерой, мощным процессором Google Tensor G2 и чистым Android. Камера позволяет делать потрясающие снимки в любых условиях освещения. Процессор обеспечивает быструю и плавную работу. Pixel 7 Pro получает обновления Android напрямую от Google, что гарантирует актуальность и безопасность.",
+      "rating": "4.9",
+      "freeDelivery": true,
+      "category": 4,
+      "sortIndex": 3,
+      "limited": false,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 14,
+    "fields": {
+      "title": "Xiaomi 13 Pro",
+      "price": "800.00",
+      "count": 18,
+      "date": "2025-03-26T12:26:09.291Z",
+      "description": "Смартфон с флагманскими характеристиками и быстрой зарядкой.",
+      "fullDescription": "Xiaomi 13 Pro – это флагманский смартфон от Xiaomi, оснащенный мощным процессором Snapdragon 8 Gen 2, отличным AMOLED-дисплеем с частотой обновления 120 Гц и тройной камерой с оптикой Leica. Смартфон поддерживает быструю зарядку мощностью 120 Вт, которая позволяет зарядить аккумулятор до 100% всего за несколько минут.",
+      "rating": "4.7",
+      "freeDelivery": true,
+      "category": 4,
+      "sortIndex": 1,
+      "limited": true,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 15,
+    "fields": {
+      "title": "Защитное стекло для iPhone 14 Pro Max",
+      "price": "15.00",
+      "count": 50,
+      "date": "2025-03-26T12:27:20.226Z",
+      "description": "Прочное защитное стекло для экрана iPhone 14 Pro Max.",
+      "fullDescription": "Защитное стекло для iPhone 14 Pro Max – это надежный способ защитить экран вашего смартфона от царапин, сколов и других повреждений. Стекло изготовлено из закаленного материала высокой твердости и имеет олеофобное покрытие, которое отталкивает отпечатки пальцев и жирные пятна.",
+      "rating": "4.6",
+      "freeDelivery": false,
+      "category": 5,
+      "sortIndex": 6,
+      "limited": false,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        7
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 16,
+    "fields": {
+      "title": "Чехол для iPad Pro 12.9 (2022) Smart Folio",
+      "price": "80.00",
+      "count": 30,
+      "date": "2025-03-26T12:31:25.553Z",
+      "description": "Оригинальный чехол-подставка для iPad Pro 12.9 (2022).",
+      "fullDescription": "Apple Smart Folio – это стильный и функциональный чехол для iPad Pro 12.9 (2022). Он изготовлен из высококачественных материалов и обеспечивает надежную защиту планшета от царапин и ударов. Чехол можно использовать как подставку для удобного просмотра видео или набора текста.",
+      "rating": "4.4",
+      "freeDelivery": true,
+      "category": 5,
+      "sortIndex": 4,
+      "limited": true,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        7
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 17,
+    "fields": {
+      "title": "Sapiens: Краткая история человечества, Юваль Ной Х",
+      "price": "20.00",
+      "count": 40,
+      "date": "2025-03-26T12:33:14.764Z",
+      "description": "Захватывающая история человечества от каменного века до наших дней.",
+      "fullDescription": "В книге “Sapiens: Краткая история человечества” Юваль Ной Харари предлагает увлекательный взгляд на развитие человечества от первых людей до современного общества. Автор исследует ключевые этапы в истории человечества, такие как когнитивная революция, сельскохозяйственная революция и научная революция, и их влияние на нашу жизнь. Книга заставляет задуматься о будущем человечества и о том, какое место мы занимаем в этом мире.",
+      "rating": "4.9",
+      "freeDelivery": true,
+      "category": 6,
+      "sortIndex": 1,
+      "limited": true,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        8
+      ]
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 18,
+    "fields": {
+      "title": "Маленький принц, Антуан де Сент-Экзюпери",
+      "price": "12.00",
+      "count": 60,
+      "date": "2025-03-26T12:34:45.610Z",
+      "description": "Философская сказка для детей и взрослых.",
+      "fullDescription": "”Маленький принц” – это философская сказка Антуана де Сент-Экзюпери, которая рассказывает о дружбе, любви, потере и смысле жизни. Книга адресована как детям, так и взрослым и заставляет задуматься о важных вещах. “Маленький принц” – это одна из самых известных и любимых книг в мире.",
+      "rating": "4.8",
+      "freeDelivery": true,
+      "category": 6,
+      "sortIndex": 2,
+      "limited": false,
+      "sold": 0,
+      "isDeleted": false,
+      "tags": [
+        8,
+        15
+      ]
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "src": "product_images/product_1/patinete-adultos-micro-micro-black-foto-375661.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "src": "product_images/product_2/6bab16f440159bf83998dfca9c8d.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 4,
+    "fields": {
+      "product": 3,
+      "src": "product_images/product_3/espressor-philips-hd865259-espressokapsuly15001506dadaplastikce_Pt7VLNM.png",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 5,
+    "fields": {
+      "product": 4,
+      "src": "product_images/product_4/9_630076.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 6,
+    "fields": {
+      "product": 5,
+      "src": "product_images/product_5/472141_2246_draft.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 7,
+    "fields": {
+      "product": 6,
+      "src": "product_images/product_6/scale_1200.png",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 8,
+    "fields": {
+      "product": 7,
+      "src": "product_images/product_7/adidas-Ultraboost-22.png",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 9,
+    "fields": {
+      "product": 8,
+      "src": "product_images/product_8/s-l1600.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 10,
+    "fields": {
+      "product": 9,
+      "src": "product_images/product_9/7088499217.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 11,
+    "fields": {
+      "product": 10,
+      "src": "product_images/product_10/izobrazhenie-sony-wf-c500-2048x914.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 12,
+    "fields": {
+      "product": 11,
+      "src": "product_images/product_11/7024810278.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 13,
+    "fields": {
+      "product": 12,
+      "src": "product_images/product_12/TSF01EGMEU_4.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 14,
+    "fields": {
+      "product": 13,
+      "src": "product_images/product_13/00wicjmrywvc4u7yarrggwqnea6bhufp.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 15,
+    "fields": {
+      "product": 14,
+      "src": "product_images/product_14/6875643199.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 16,
+    "fields": {
+      "product": 15,
+      "src": "product_images/product_15/XXL.png",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 17,
+    "fields": {
+      "product": 16,
+      "src": "product_images/product_16/51kex4mWkQL.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 18,
+    "fields": {
+      "product": 17,
+      "src": "product_images/product_17/90091b685c89332ae38a16b4c5bc3696.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 19,
+    "fields": {
+      "product": 18,
+      "src": "product_images/product_18/5YKmJ5nDKpB24BU-LY5AlMXebKlLbkJqSp_kEJOQRgU.jpg",
+      "alt": "Not Found."
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 1,
+    "fields": {
+      "product": 2,
+      "author": "Андрей",
+      "email": "123@gmail.com",
+      "text": "Потрясающий звук",
+      "rate": 5,
+      "date": "2025-02-13"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 2,
+    "fields": {
+      "product": 5,
+      "author": "Евгений",
+      "email": "123mmm@gmail.com",
+      "text": "Крайне удобен!",
+      "rate": 4,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 3,
+    "fields": {
+      "product": 5,
+      "author": "Елена",
+      "email": "joker25@mail.ru",
+      "text": "Лямки жмут!",
+      "rate": 2,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 4,
+    "fields": {
+      "product": 1,
+      "author": "Иван Петров",
+      "email": "ivan.petrov@example.com",
+      "text": "Отличный самокат, ребенок в восторге! Крепкий и удобный.",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 5,
+    "fields": {
+      "product": 1,
+      "author": "Анна Смирнова",
+      "email": "anna.smirnova@test.net",
+      "text": "Хороший самокат, но немного тяжеловат для ребенка 6 лет.",
+      "rate": 4,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 6,
+    "fields": {
+      "product": 2,
+      "author": "Дмитрий Иванов",
+      "email": "dmitry.ivanov@mail.org",
+      "text": "Просто невероятное шумоподавление! Звук отличный, удобно сидят.",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 7,
+    "fields": {
+      "product": 3,
+      "author": "Сергей Николаев",
+      "email": "sergey.nikolaev@yahoo.com",
+      "text": "Кофе просто супер! Легко чистить, много разных напитков.",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 8,
+    "fields": {
+      "product": 3,
+      "author": "Ольга Кузнецова",
+      "email": "olga.kuznetsova@outlook.fr",
+      "text": "Хорошая кофемашина, но иногда протекает вода.",
+      "rate": 4,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 9,
+    "fields": {
+      "product": 4,
+      "author": "Алексей Морозов",
+      "email": "alexey.morozov@hotmail.de",
+      "text": "Лучший телефон, который у меня был!",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 10,
+    "fields": {
+      "product": 4,
+      "author": "Светлана Петрова",
+      "email": "svetlana.petrova@inbox.com",
+      "text": "Камера просто бомба! Производительность на высоте.",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 11,
+    "fields": {
+      "product": 6,
+      "author": "Марина Зайцева",
+      "email": "marina.zaytseva@anotheremail.net",
+      "text": "Классика, которую стоит прочитать каждому!",
+      "rate": 5,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 12,
+    "fields": {
+      "product": 6,
+      "author": "Андрей Павлов",
+      "email": "andrey.pavlov@testdomain.info",
+      "text": "Интересная книга, но немного затянутое начало.",
+      "rate": 4,
+      "date": "2025-03-19"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 17,
+    "fields": {
+      "product": 3,
+      "author": "Андрей Бокарев",
+      "email": "123@mail.re",
+      "text": "Очень плохо",
+      "rate": 1,
+      "date": "2025-03-21"
+    }
+  },
+  {
+    "model": "catalog.reviews",
+    "pk": 18,
+    "fields": {
+      "product": 2,
+      "author": "Андрей",
+      "email": "123@mail.re",
+      "text": "Одно ухо умерло спустя месяц",
+      "rate": 1,
+      "date": "2025-03-25"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 1,
+    "fields": {
+      "product": 5,
+      "name": "Размер",
+      "value": "XL"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "name": "Материал рамы",
+      "value": "Алюминий"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "name": "Максимальная нагрузка",
+      "value": "100 кг"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "name": "Время работы",
+      "value": "30 часов"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 5,
+    "fields": {
+      "product": 2,
+      "name": "Тип подключения",
+      "value": "Bluetooth 5.2"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 6,
+    "fields": {
+      "product": 3,
+      "name": "Объем резервуара для воды",
+      "value": "1.8 литра"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 7,
+    "fields": {
+      "product": 3,
+      "name": "Мощность",
+      "value": "1500 Вт"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 8,
+    "fields": {
+      "product": 4,
+      "name": "Объем памяти",
+      "value": "256 GB"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 9,
+    "fields": {
+      "product": 4,
+      "name": "Диагональ экрана",
+      "value": "6.8 дюймов"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 10,
+    "fields": {
+      "product": 5,
+      "name": "Материал",
+      "value": "Полиэстер"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 11,
+    "fields": {
+      "product": 5,
+      "name": "Объем",
+      "value": "17 литров"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 12,
+    "fields": {
+      "product": 6,
+      "name": "Количество страниц",
+      "value": "384"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 13,
+    "fields": {
+      "product": 6,
+      "name": "Переплет",
+      "value": "Твердый"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 14,
+    "fields": {
+      "product": 7,
+      "name": "Размер",
+      "value": "40-46 (EU)"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 15,
+    "fields": {
+      "product": 7,
+      "name": "Материал верха",
+      "value": "Primeknit+"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 16,
+    "fields": {
+      "product": 8,
+      "name": "Объем",
+      "value": "24 литра"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 17,
+    "fields": {
+      "product": 8,
+      "name": "Материал",
+      "value": "100% полиэстер"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 18,
+    "fields": {
+      "product": 9,
+      "name": "Мощность",
+      "value": "2 x 10 Вт"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 19,
+    "fields": {
+      "product": 9,
+      "name": "Защита от воды",
+      "value": "IP67"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 20,
+    "fields": {
+      "product": 10,
+      "name": "Bluetooth",
+      "value": "5.0"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 21,
+    "fields": {
+      "product": 10,
+      "name": "Время работы",
+      "value": "До 10 часов"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 22,
+    "fields": {
+      "product": 11,
+      "name": "Мощность",
+      "value": "1.5 л.с"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 23,
+    "fields": {
+      "product": 11,
+      "name": "Материал чаши",
+      "value": "Стекло"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 24,
+    "fields": {
+      "product": 12,
+      "name": "Количество отделений",
+      "value": "2"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 25,
+    "fields": {
+      "product": 12,
+      "name": "Материал корпуса",
+      "value": "Нержавеющая сталь"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 26,
+    "fields": {
+      "product": 13,
+      "name": "Объем памяти",
+      "value": "128 GB"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 27,
+    "fields": {
+      "product": 13,
+      "name": "Размер экрана",
+      "value": "6.7 дюйма"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 28,
+    "fields": {
+      "product": 14,
+      "name": "Объем памяти",
+      "value": "256 GB"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 29,
+    "fields": {
+      "product": 14,
+      "name": "Размер экрана",
+      "value": "6.73 дюйма"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 30,
+    "fields": {
+      "product": 15,
+      "name": "Твердость",
+      "value": "9H"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 31,
+    "fields": {
+      "product": 15,
+      "name": "Покрытие",
+      "value": "Олеофобное"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 32,
+    "fields": {
+      "product": 16,
+      "name": "Материал",
+      "value": "Полиуретан"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 33,
+    "fields": {
+      "product": 16,
+      "name": "Совместимость",
+      "value": "iPad Pro 12.9 (2022)"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 34,
+    "fields": {
+      "product": 17,
+      "name": "Количество страниц",
+      "value": "560"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 35,
+    "fields": {
+      "product": 17,
+      "name": "Переплет",
+      "value": "Твердый"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 36,
+    "fields": {
+      "product": 18,
+      "name": "Количество страниц",
+      "value": "96"
+    }
+  },
+  {
+    "model": "catalog.specifications",
+    "pk": 37,
+    "fields": {
+      "product": 18,
+      "name": "Перевод",
+      "value": "Нора Галь"
+    }
+  },
+  {
+    "model": "catalog.saleproducts",
+    "pk": 1,
+    "fields": {
+      "product": 4,
+      "salePrice": "700.00",
+      "dateFrom": "2025-03-18",
+      "dateTo": "2025-03-24"
+    }
+  },
+  {
+    "model": "catalog.saleproducts",
+    "pk": 2,
+    "fields": {
+      "product": 3,
+      "salePrice": "599.99",
+      "dateFrom": "2025-03-18",
+      "dateTo": "2025-03-22"
+    }
+  }
+]

@@ -1,2 +1,14 @@
 
 .DS_Store
+
+# venv
+django_venv/
+
+# db
+*.sqlite3
+
+# PyCharm
+.idea/
+
+# cache
+*.pyc
